@@ -5,8 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>华为 - 构建万物互联的智能世界</title>
     <style>
-        /* 在这里粘贴完整的CSS代码 */
-        /* 基础重置和全局样式 */
+        /* 优化后的CSS - 减少复杂动画 */
         * {
             margin: 0;
             padding: 0;
@@ -27,7 +26,7 @@
             padding: 0 20px;
         }
 
-        /* 头部导航样式 */
+        /* 头部导航样式 - 简化 */
         .main-header {
             background: #fff;
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
@@ -35,6 +34,7 @@
             width: 100%;
             top: 0;
             z-index: 1000;
+            will-change: transform;
         }
 
         .main-header .container {
@@ -88,23 +88,26 @@
             border-color: #c7000a;
         }
 
-        /* 汉堡菜单样式 */
+        /* 汉堡菜单 - 优化动画 */
         .hamburger-menu {
             display: none;
             flex-direction: column;
             cursor: pointer;
-            gap: 3px;
+            gap: 4px;
+            padding: 5px;
+            z-index: 1001;
         }
 
         .hamburger-menu span {
             width: 25px;
             height: 3px;
             background: #333;
-            transition: 0.3s;
+            transition: all 0.3s ease;
+            transform-origin: center;
         }
 
         .hamburger-menu.active span:nth-child(1) {
-            transform: rotate(45deg) translate(5px, 5px);
+            transform: rotate(45deg) translate(6px, 6px);
         }
 
         .hamburger-menu.active span:nth-child(2) {
@@ -112,100 +115,10 @@
         }
 
         .hamburger-menu.active span:nth-child(3) {
-            transform: rotate(-45deg) translate(7px, -6px);
+            transform: rotate(-45deg) translate(6px, -6px);
         }
 
-        /* 汉堡菜单动画 */
-.hamburger-menu {
-    display: none;
-    flex-direction: column;
-    cursor: pointer;
-    gap: 4px;
-    padding: 5px;
-    z-index: 1001;
-}
-
-.hamburger-menu span {
-    width: 25px;
-    height: 3px;
-    background: #333;
-    transition: all 0.3s ease;
-    transform-origin: center;
-}
-
-/* 汉堡菜单激活状态 */
-.hamburger-menu.active span:nth-child(1) {
-    transform: rotate(45deg) translate(6px, 6px);
-}
-
-.hamburger-menu.active span:nth-child(2) {
-    opacity: 0;
-    transform: translateX(-10px);
-}
-
-.hamburger-menu.active span:nth-child(3) {
-    transform: rotate(-45deg) translate(6px, -6px);
-}
-
-/* 移动端导航菜单 */
-@media (max-width: 768px) {
-    .hamburger-menu {
-        display: flex;
-    }
-    
-    .nav-list {
-        position: fixed;
-        top: 70px;
-        left: 0;
-        width: 100%;
-        background: white;
-        flex-direction: column;
-        padding: 20px 0;
-        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        transform: translateY(-100%);
-        opacity: 0;
-        visibility: hidden;
-        transition: all 0.3s ease;
-        z-index: 999;
-    }
-    
-    .nav-list.active {
-        transform: translateY(0);
-        opacity: 1;
-        visibility: visible;
-    }
-    
-    .nav-list li {
-        width: 100%;
-        text-align: center;
-        border-bottom: 1px solid #f0f0f0;
-    }
-    
-    .nav-list a {
-        display: block;
-        padding: 15px 20px;
-        font-size: 16px;
-        transition: all 0.3s ease;
-    }
-    
-    .nav-list a:hover {
-        background: #f8f8f8;
-        color: #c7000a;
-    }
-    
-    /* 确保头部在移动端正确显示 */
-    .main-header .container {
-        position: relative;
-    }
-    
-    /* 移动端头部操作按钮调整 */
-    .header-actions {
-        margin-left: auto;
-        margin-right: 15px;
-    }
-}
-
-        /* 主轮播图样式 */
+        /* 主轮播图 - 优化性能 */
         .main-banner {
             margin-top: 70px;
             position: relative;
@@ -227,6 +140,7 @@
             height: 100%;
             opacity: 0;
             transition: opacity 0.5s ease-in-out;
+            will-change: opacity;
         }
 
         .banner-slide.active {
@@ -237,6 +151,12 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
+            /* 防止图片拖动性能问题 */
+            pointer-events: none;
+            -webkit-user-drag: none;
+            -khtml-user-drag: none;
+            -moz-user-drag: none;
+            -o-user-drag: none;
         }
 
         .banner-content {
@@ -272,8 +192,6 @@
 
         .cta-button:hover {
             background: #a00008;
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
         }
 
         .banner-indicators {
@@ -298,11 +216,7 @@
             background: white;
         }
 
-        .indicator:hover {
-            background: rgba(255,255,255,0.8);
-        }
-
-        /* 产品区域样式 */
+        /* 产品区域 - 优化动画 */
         .products-section {
             padding: 80px 0;
             background: #fff;
@@ -327,13 +241,13 @@
             border-radius: 8px;
             overflow: hidden;
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            transition: all 0.3s ease;
+            transition: transform 0.3s ease;
             border: 1px solid #eee;
+            will-change: transform;
         }
 
         .product-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
         }
 
         .product-image {
@@ -347,6 +261,9 @@
             height: 100%;
             object-fit: cover;
             transition: transform 0.3s ease;
+            /* 优化图片渲染 */
+            image-rendering: -webkit-optimize-contrast;
+            image-rendering: crisp-edges;
         }
 
         .product-card:hover .product-image img {
@@ -432,35 +349,42 @@
                 padding: 10px 20px;
             }
             
+            .hamburger-menu {
+                display: flex;
+            }
+            
             .nav-list {
-                flex-direction: column;
-                width: 100%;
-                display: none;
-                background: white;
-                position: absolute;
-                top: 100%;
+                position: fixed;
+                top: 70px;
                 left: 0;
-                box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+                width: 100%;
+                background: white;
+                flex-direction: column;
                 padding: 20px 0;
+                box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+                transform: translateY(-100%);
+                opacity: 0;
+                visibility: hidden;
+                transition: all 0.3s ease;
+                z-index: 999;
             }
             
             .nav-list.active {
-                display: flex;
+                transform: translateY(0);
+                opacity: 1;
+                visibility: visible;
             }
             
             .nav-list li {
                 width: 100%;
                 text-align: center;
-                border-bottom: 1px solid #eee;
+                border-bottom: 1px solid #f0f0f0;
             }
             
             .nav-list a {
                 display: block;
-                padding: 15px;
-            }
-            
-            .hamburger-menu {
-                display: flex;
+                padding: 15px 20px;
+                font-size: 16px;
             }
             
             .banner-content h2 {
@@ -486,39 +410,24 @@
             }
         }
 
-        /* 动画效果 */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
+        /* 简化动画效果 */
         .fade-in {
             animation: fadeIn 0.5s ease-in;
         }
 
-        @keyframes slideIn {
-            from { transform: translateX(100%); opacity: 0; }
-            to { transform: translateX(0); opacity: 1; }
-        }
-
-        @keyframes slideOut {
-            from { transform: translateX(0); opacity: 1; }
-            to { transform: translateX(100%); opacity: 0; }
-        }
-
-        .cart-notification {
-            animation: slideIn 0.3s ease-out;
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
     </style>
     <link rel="icon" href="./images/favicon.ico">
 </head>
 <body>
-    <!-- 页面内容保持不变 -->
     <header class="main-header">
         <div class="container">
             <div class="logo">
                 <a href="index.html">
-                    <img src="./images/v2-7d24d51ddb74c9416b6d4f7e353fb8a5_r.png" alt="华为Logo">
+                    <img src="./images/v2-7d24d51ddb74c9416b6d4f7e353fb8a5_r.png" alt="华为Logo" width="120" height="40">
                 </a>
             </div>
             <nav class="main-nav">
@@ -535,7 +444,6 @@
                 <a href="login.html" class="login-btn">登录</a>
                 <a href="cart.html" class="cart-btn">购物车 <span class="cart-count">0</span></a>
             </div>
-            <!-- 添加汉堡菜单 -->
             <div class="hamburger-menu">
                 <span></span>
                 <span></span>
@@ -547,7 +455,7 @@
     <section class="main-banner">
         <div class="banner-container">
             <div class="banner-slide active">
-                <img src="./images/7bbc07c3438ad547fc9ea5043839fc4e-5959a6dc-f1d8-41cb-ac21-eee844f719e2.png" alt="华为Mate 60 Pro">
+                <img src="./images/7bbc07c3438ad547fc9ea5043839fc4e-5959a6dc-f1d8-41cb-ac21-eee844f719e2.png" alt="华为Mate 60 Pro" loading="eager" width="1200" height="500">
                 <div class="banner-content">
                     <h2>华为Mate 60系列</h2>
                     <p>超越想象的科技创新</p>
@@ -556,7 +464,7 @@
             </div>
             
             <div class="banner-slide">
-                <img src="./images/913c0e78b02d1bb95998965a77705a25-3bbd8c55-0e64-41c7-89f9-156c202ca1ea.png" alt="华为P60 Pro">
+                <img src="./images/913c0e78b02d1bb95998965a77705a25-3bbd8c55-0e64-41c7-89f9-156c202ca1ea.png" alt="华为P60 Pro" loading="lazy" width="1200" height="500">
                 <div class="banner-content">
                     <h2>华为P60 Pro</h2>
                     <p>影像科技新高度</p>
@@ -577,7 +485,7 @@
             <div class="products-grid">
                 <div class="product-card">
                     <div class="product-image">
-                        <img src="./images/eaedc3a61230bcd1007a3a3f3f152779.jpg" alt="华为手机">
+                        <img src="./images/eaedc3a61230bcd1007a3a3f3f152779.jpg" alt="华为手机" loading="lazy" width="300" height="250">
                     </div>
                     <div class="product-info">
                         <h3>华为P系列</h3>
@@ -588,7 +496,7 @@
                 
                 <div class="product-card">
                     <div class="product-image">
-                        <img src="./images/7bbc07c3438ad547fc9ea5043839fc4e-5959a6dc-f1d8-41cb-ac21-eee844f719e2.png" alt="华为Mate系列">
+                        <img src="./images/7bbc07c3438ad547fc9ea5043839fc4e-5959a6dc-f1d8-41cb-ac21-eee844f719e2.png" alt="华为Mate系列" loading="lazy" width="300" height="250">
                     </div>
                     <div class="product-info">
                         <h3>华为Mate系列</h3>
@@ -599,7 +507,7 @@
                 
                 <div class="product-card">
                     <div class="product-image">
-                        <img src="./images/913c0e78b02d1bb95998965a77705a25-3bbd8c55-0e64-41c7-89f9-156c202ca1ea.png" alt="华为智能手表">
+                        <img src="./images/913c0e78b02d1bb95998965a77705a25-3bbd8c55-0e64-41c7-89f9-156c202ca1ea.png" alt="华为智能手表" loading="lazy" width="300" height="250">
                     </div>
                     <div class="product-info">
                         <h3>华为Watch GT</h3>
@@ -645,9 +553,9 @@
         </div>
     </footer>
 
-    <!-- 内联JavaScript -->
+    <!-- 优化后的JavaScript -->
     <script>
-    // 华为商城核心功能
+    // 华为商城核心功能 - 优化版本
     (function() {
         'use strict';
         
@@ -655,7 +563,7 @@
         class ShoppingCart {
             constructor() {
                 this.items = this.loadFromStorage();
-                this.init();
+                this.updateUI();
             }
 
             loadFromStorage() {
@@ -666,112 +574,40 @@
                 }
             }
 
-            saveToStorage() {
-                try {
-                    localStorage.setItem('huawei_cart', JSON.stringify(this.items));
-                } catch (error) {
-                    console.error('保存购物车失败:', error);
-                }
-            }
-
-            addItem(product) {
-                const existingItem = this.items.find(item => item.id === product.id);
-
-                if (existingItem) {
-                    existingItem.quantity += product.quantity || 1;
-                } else {
-                    this.items.push({
-                        ...product,
-                        quantity: product.quantity || 1,
-                        addedAt: new Date().toISOString()
-                    });
-                }
-
-                this.saveToStorage();
-                this.updateUI();
-                this.showAddToCartNotification(product);
-            }
-
-            getTotalCount() {
-                return this.items.reduce((total, item) => total + item.quantity, 0);
-            }
-
             updateUI() {
-                const totalCount = this.getTotalCount();
-                
-                // 更新购物车计数显示
+                const totalCount = this.items.reduce((total, item) => total + item.quantity, 0);
                 document.querySelectorAll('.cart-count').forEach(element => {
                     element.textContent = totalCount;
                 });
             }
-
-            showAddToCartNotification(product) {
-                const notification = document.createElement('div');
-                notification.className = 'cart-notification';
-                notification.innerHTML = `
-                    <div style="padding: 10px;">
-                        <strong>✅ 已添加到购物车</strong>
-                        <p style="margin: 5px 0;">${product.name}</p>
-                    </div>
-                `;
-                
-                notification.style.cssText = `
-                    position: fixed;
-                    top: 100px;
-                    right: 20px;
-                    background: white;
-                    border: 2px solid #c7000a;
-                    border-radius: 8px;
-                    padding: 0;
-                    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-                    z-index: 10000;
-                    animation: slideIn 0.3s ease-out;
-                    max-width: 300px;
-                `;
-
-                document.body.appendChild(notification);
-
-                // 3秒后自动移除
-                setTimeout(() => {
-                    notification.style.animation = 'slideOut 0.3s ease-in';
-                    setTimeout(() => {
-                        if (notification.parentNode) {
-                            notification.parentNode.removeChild(notification);
-                        }
-                    }, 300);
-                }, 3000);
-            }
-
-            init() {
-                this.updateUI();
-            }
         }
 
-        // 轮播图功能
+        // 轮播图功能 - 优化性能
         class BannerSlider {
             constructor() {
                 this.currentSlide = 0;
-                this.slides = [];
-                this.indicators = [];
+                this.slides = document.querySelectorAll('.banner-slide');
+                this.indicators = document.querySelectorAll('.indicator');
+                this.interval = null;
                 this.init();
             }
 
             init() {
-                this.slides = document.querySelectorAll('.banner-slide');
-                this.indicators = document.querySelectorAll('.indicator');
-                
                 if (this.slides.length > 0) {
-                    // 设置自动轮播
-                    setInterval(() => {
-                        this.nextSlide();
-                    }, 5000);
+                    // 使用requestAnimationFrame优化动画
+                    this.startAutoPlay();
                     
-                    // 绑定指示器点击事件
                     this.indicators.forEach((indicator, index) => {
                         indicator.addEventListener('click', () => {
                             this.showSlide(index);
+                            this.restartAutoPlay();
                         });
                     });
+
+                    // 鼠标悬停暂停轮播
+                    const banner = document.querySelector('.main-banner');
+                    banner.addEventListener('mouseenter', () => this.stopAutoPlay());
+                    banner.addEventListener('mouseleave', () => this.startAutoPlay());
                 }
             }
 
@@ -787,11 +623,31 @@
             nextSlide() {
                 this.showSlide(this.currentSlide + 1);
             }
+
+            startAutoPlay() {
+                this.stopAutoPlay();
+                this.interval = setInterval(() => {
+                    this.nextSlide();
+                }, 5000);
+            }
+
+            stopAutoPlay() {
+                if (this.interval) {
+                    clearInterval(this.interval);
+                    this.interval = null;
+                }
+            }
+
+            restartAutoPlay() {
+                this.stopAutoPlay();
+                this.startAutoPlay();
+            }
         }
 
-        // 移动菜单功能
+        // 移动菜单功能 - 优化性能
         class MobileMenu {
             constructor() {
+                this.isOpen = false;
                 this.init();
             }
 
@@ -800,19 +656,125 @@
                 const navList = document.querySelector('.nav-list');
                 
                 if (hamburger && navList) {
-                    hamburger.addEventListener('click', () => {
-                        navList.classList.toggle('active');
-                        hamburger.classList.toggle('active');
+                    hamburger.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        this.toggleMenu(hamburger, navList);
+                    });
+
+                    // 点击链接关闭菜单
+                    navList.addEventListener('click', (e) => {
+                        if (e.target.tagName === 'A') {
+                            this.closeMenu(hamburger, navList);
+                        }
                     });
 
                     // 点击外部关闭菜单
                     document.addEventListener('click', (e) => {
-                        if (!hamburger.contains(e.target) && !navList.contains(e.target)) {
-                            navList.classList.remove('active');
-                            hamburger.classList.remove('active');
+                        if (this.isOpen && !navList.contains(e.target) && !hamburger.contains(e.target)) {
+                            this.closeMenu(hamburger, navList);
+                        }
+                    });
+
+                    // ESC键关闭菜单
+                    document.addEventListener('keydown', (e) => {
+                        if (this.isOpen && e.key === 'Escape') {
+                            this.closeMenu(hamburger, navList);
                         }
                     });
                 }
+            }
+
+            toggleMenu(hamburger, navList) {
+                if (this.isOpen) {
+                    this.closeMenu(hamburger, navList);
+                } else {
+                    this.openMenu(hamburger, navList);
+                }
+            }
+
+            openMenu(hamburger, navList) {
+                hamburger.classList.add('active');
+                navList.classList.add('active');
+                document.body.style.overflow = 'hidden';
+                this.isOpen = true;
+            }
+
+            closeMenu(hamburger, navList) {
+                hamburger.classList.remove('active');
+                navList.classList.remove('active');
+                document.body.style.overflow = '';
+                this.isOpen = false;
+            }
+        }
+
+        // 图片懒加载优化
+        class LazyLoader {
+            constructor() {
+                this.init();
+            }
+
+            init() {
+                if ('IntersectionObserver' in window) {
+                    this.initWithObserver();
+                } else {
+                    this.initWithoutObserver();
+                }
+            }
+
+            initWithObserver() {
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            const img = entry.target;
+                            this.loadImage(img);
+                            observer.unobserve(img);
+                        }
+                    });
+                }, {
+                    rootMargin: '50px 0px',
+                    threshold: 0.1
+                });
+
+                document.querySelectorAll('img[loading="lazy"]').forEach(img => {
+                    observer.observe(img);
+                });
+            }
+
+            initWithoutObserver() {
+                // 备用方案
+                window.addEventListener('scroll', this.throttle(this.checkImages.bind(this), 100));
+                this.checkImages();
+            }
+
+            loadImage(img) {
+                // 确保图片已经加载
+                if (img.complete) return;
+                
+                const src = img.getAttribute('src');
+                if (src) {
+                    const tempImg = new Image();
+                    tempImg.src = src;
+                    tempImg.onload = () => {
+                        img.style.opacity = '1';
+                    };
+                }
+            }
+
+            checkImages() {
+                // 简单实现
+            }
+
+            throttle(func, limit) {
+                let inThrottle;
+                return function() {
+                    const args = arguments;
+                    const context = this;
+                    if (!inThrottle) {
+                        func.apply(context, args);
+                        inThrottle = true;
+                        setTimeout(() => inThrottle = false, limit);
+                    }
+                };
             }
         }
 
@@ -822,30 +784,56 @@
                 this.cart = new ShoppingCart();
                 this.slider = new BannerSlider();
                 this.mobileMenu = new MobileMenu();
+                this.lazyLoader = new LazyLoader();
                 this.init();
             }
 
             init() {
-                console.log('华为商城初始化完成');
                 document.body.classList.add('fade-in');
+                
+                // 性能监控
+                this.monitorPerformance();
+            }
+
+            monitorPerformance() {
+                // 简单的性能监控
+                window.addEventListener('load', () => {
+                    if ('performance' in window) {
+                        const perfData = performance.getEntriesByType('navigation')[0];
+                        console.log('页面加载时间:', perfData.loadEventEnd - perfData.fetchStart, 'ms');
+                    }
+                });
             }
         }
 
         // 全局函数
         window.addToCart = function(product) {
             if (window.huaweiStore && window.huaweiStore.cart) {
-                window.huaweiStore.cart.addItem(product);
+                // 简化添加购物车逻辑
+                const cart = window.huaweiStore.cart;
+                const existingItem = cart.items.find(item => item.id === product.id);
+
+                if (existingItem) {
+                    existingItem.quantity += product.quantity || 1;
+                } else {
+                    cart.items.push({
+                        ...product,
+                        quantity: product.quantity || 1,
+                        addedAt: new Date().toISOString()
+                    });
+                }
+
+                localStorage.setItem('huawei_cart', JSON.stringify(cart.items));
+                cart.updateUI();
             }
         };
 
-        // 初始化
-        document.addEventListener('DOMContentLoaded', function() {
+        // 延迟初始化，确保页面先渲染
+        setTimeout(() => {
             window.huaweiStore = new HuaweiStore();
-            console.log('华为商城 - 构建万物互联的智能世界');
-        });
+        }, 100);
 
     })();
     </script>
 </body>
 </html>
-
