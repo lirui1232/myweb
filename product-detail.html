@@ -4,10 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title id="page-title">商品详情 - 华为官方商城</title>
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/header.css">
-    <link rel="stylesheet" href="css/responsive.css">
-    <link rel="icon" href="images/favicon.ico">
+    <link rel="stylesheet" href="/myweb/main.css">
+    <link rel="icon" href="/myweb/images/favicon.ico">
     <style>
         /* 商品详情页专用样式 */
         .product-detail-hero {
@@ -293,7 +291,7 @@
         <div class="container">
             <div class="logo">
                 <a href="index.html">
-                    <img src="images/logo.png" alt="华为Logo">
+                    <img src="/myweb/images/v2-7d24d51ddb74c9416b6d4f7e353fb8a5_r.png" alt="华为Logo">
                 </a>
             </div>
             <nav class="main-nav">
@@ -473,8 +471,7 @@
         </div>
     </div>
 
-    <script src="js/script.js"></script>
-    <script src="js/product-data.js"></script>
+    <script src="/myweb/main.js"></script>
     <script>
         // 商品数据加载和渲染
         let currentProduct = null;
@@ -494,8 +491,44 @@
         
         // 加载商品数据
         function loadProductData(productId) {
-            // 从product-data.js中获取商品数据
-            currentProduct = productDatabase[productId];
+            // 这里应该从您的product-data.js中获取商品数据
+            // 为了演示，我们创建一个简单的商品对象
+            currentProduct = {
+                id: productId,
+                name: "华为Mate 60 Pro",
+                subtitle: "超可靠玄武架构，卫星通话",
+                price: 6999,
+                category: "智能手机",
+                badge: "新品",
+                images: [
+                    "/myweb/images/22.jpg",
+                    "/myweb/images/华为+Mate+50+介绍.jpg"
+                ],
+                colors: [
+                    { name: "雅川青", value: "#4a6572", image: "/myweb/images/22.jpg" },
+                    { name: "白沙银", value: "#e0e0e0", image: "/myweb/images/华为+Mate+50+介绍.jpg" }
+                ],
+                configs: [
+                    { name: "12GB+256GB", price: 6999 },
+                    { name: "12GB+512GB", price: 7999 },
+                    { name: "12GB+1TB", price: 8999 }
+                ],
+                features: [
+                    { icon: "📡", title: "卫星通话", description: "支持北斗卫星消息" },
+                    { icon: "📸", title: "超光变XMAGE", description: "卓越的影像能力" },
+                    { icon: "⚡", title: "麒麟9000S", description: "强大的处理性能" },
+                    { icon: "🔋", title: "长续航", description: "超长电池续航时间" }
+                ],
+                specifications: [
+                    { name: "屏幕", value: "6.82英寸 OLED" },
+                    { name: "处理器", value: "麒麟9000S" },
+                    { name: "内存", value: "12GB" },
+                    { name: "存储", value: "256GB/512GB/1TB" },
+                    { name: "摄像头", value: "5000万像素超光变主摄" },
+                    { name: "电池", value: "5000mAh" }
+                ],
+                related: ["p60-pro", "mate60"]
+            };
             
             if (!currentProduct) {
                 // 如果商品不存在，显示错误信息
@@ -541,9 +574,6 @@
             
             // 渲染规格参数
             renderProductSpecs();
-            
-            // 渲染相关产品
-            renderRelatedProducts();
         }
         
         // 渲染商品图片
@@ -646,7 +676,7 @@
             // 添加配置选项
             currentProduct.configs.forEach((config, index) => {
                 const configOption = document.createElement('div');
-                configOption.className = `config-option ${index === 0 ? 'active' : ''} ${config.disabled ? 'disabled' : ''}`;
+                configOption.className = `config-option ${index === 0 ? 'active' : ''}`;
                 configOption.setAttribute('data-config', config.name);
                 configOption.setAttribute('data-price', config.price);
                 
@@ -661,18 +691,16 @@
                 configOption.appendChild(configName);
                 configOption.appendChild(configPrice);
                 
-                if (!config.disabled) {
-                    configOption.addEventListener('click', function() {
-                        // 移除所有激活状态
-                        document.querySelectorAll('.config-option').forEach(c => c.classList.remove('active'));
-                        // 添加当前激活状态
-                        this.classList.add('active');
-                        
-                        // 更新价格
-                        const priceElement = document.getElementById('product-price');
-                        priceElement.textContent = '¥' + this.getAttribute('data-price');
-                    });
-                }
+                configOption.addEventListener('click', function() {
+                    // 移除所有激活状态
+                    document.querySelectorAll('.config-option').forEach(c => c.classList.remove('active'));
+                    // 添加当前激活状态
+                    this.classList.add('active');
+                    
+                    // 更新价格
+                    const priceElement = document.getElementById('product-price');
+                    priceElement.textContent = '¥' + this.getAttribute('data-price');
+                });
                 
                 configOptionsContainer.appendChild(configOption);
             });
@@ -729,59 +757,6 @@
                 row.appendChild(td);
                 
                 specsTable.appendChild(row);
-            });
-        }
-        
-        // 渲染相关产品
-        function renderRelatedProducts() {
-            const relatedProductsContainer = document.getElementById('related-products');
-            
-            // 清空相关产品区域
-            relatedProductsContainer.innerHTML = '';
-            
-            // 添加相关产品
-            currentProduct.related.forEach(productId => {
-                const relatedProduct = productDatabase[productId];
-                if (!relatedProduct) return;
-                
-                const productCard = document.createElement('div');
-                productCard.className = 'product-card';
-                
-                const productImage = document.createElement('div');
-                productImage.className = 'product-image';
-                
-                const img = document.createElement('img');
-                img.src = relatedProduct.images[0];
-                img.alt = relatedProduct.name;
-                
-                const productInfo = document.createElement('div');
-                productInfo.className = 'product-info';
-                
-                const productName = document.createElement('h3');
-                productName.textContent = relatedProduct.name;
-                
-                const productDesc = document.createElement('p');
-                productDesc.textContent = relatedProduct.subtitle;
-                
-                const productPrice = document.createElement('div');
-                productPrice.className = 'price';
-                productPrice.textContent = `¥${relatedProduct.price}起`;
-                
-                const productLink = document.createElement('a');
-                productLink.className = 'cta-button';
-                productLink.href = `product-detail.html?id=${productId}`;
-                productLink.textContent = '查看详情';
-                
-                productImage.appendChild(img);
-                productInfo.appendChild(productName);
-                productInfo.appendChild(productDesc);
-                productInfo.appendChild(productPrice);
-                productInfo.appendChild(productLink);
-                
-                productCard.appendChild(productImage);
-                productCard.appendChild(productInfo);
-                
-                relatedProductsContainer.appendChild(productCard);
             });
         }
         
