@@ -4,14 +4,199 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>服务支持 - 华为官方</title>
-    <link rel="stylesheet" href="/myweb/main.css">
-    <link rel="icon" href="/myweb/images/favicon.ico">
     <style>
+        /* 在这里粘贴与index.html相同的完整CSS代码 */
+        /* 基础重置和全局样式 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #fff;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* 头部导航样式 */
+        .main-header {
+            background: #fff;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .main-header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+        }
+
+        .logo img {
+            height: 40px;
+            width: auto;
+        }
+
+        .nav-list {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        .nav-list a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s;
+            font-size: 16px;
+        }
+
+        .nav-list a:hover,
+        .nav-list a.active {
+            color: #c7000a;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .login-btn, .cart-btn {
+            text-decoration: none;
+            color: #333;
+            padding: 8px 16px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            transition: all 0.3s;
+            font-size: 14px;
+        }
+
+        .login-btn:hover, .cart-btn:hover {
+            background: #f5f5f5;
+            border-color: #c7000a;
+        }
+
+        .hamburger-menu {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 3px;
+        }
+
+        .hamburger-menu span {
+            width: 25px;
+            height: 3px;
+            background: #333;
+            transition: 0.3s;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            color: #333;
+            font-weight: bold;
+        }
+
+        .series-desc {
+            text-align: center;
+            color: #666;
+            margin-bottom: 50px;
+            font-size: 1.1rem;
+        }
+
+        .price {
+            font-size: 1.4rem;
+            font-weight: bold;
+            color: #c7000a;
+            margin-bottom: 15px;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 12px 30px;
+            background: #c7000a;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: background 0.3s;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .cta-button:hover {
+            background: #a00008;
+        }
+
+        /* 页脚样式 */
+        .main-footer {
+            background: #f8f8f8;
+            padding: 50px 0 20px;
+            margin-top: 50px;
+            border-top: 1px solid #eee;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 30px;
+        }
+
+        .footer-section h4 {
+            margin-bottom: 20px;
+            color: #333;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section li {
+            margin-bottom: 10px;
+        }
+
+        .footer-section a {
+            text-decoration: none;
+            color: #666;
+            transition: color 0.3s;
+            font-size: 14px;
+        }
+
+        .footer-section a:hover {
+            color: #c7000a;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+            color: #666;
+            font-size: 14px;
+        }
+
+        /* 服务支持特有样式 */
         .support-hero {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
             padding: 4rem 0;
             text-align: center;
+            margin-top: 70px;
         }
         
         .search-box {
@@ -25,6 +210,7 @@
             border: none;
             border-radius: 25px;
             font-size: 1rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
         }
         
         .support-categories {
@@ -44,15 +230,28 @@
             text-align: center;
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
             transition: transform 0.3s ease;
+            border: 1px solid #eee;
         }
         
         .category-card:hover {
             transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
         }
         
         .category-icon {
             font-size: 3rem;
             margin-bottom: 1rem;
+        }
+        
+        .category-card h3 {
+            margin-bottom: 1rem;
+            color: #333;
+        }
+        
+        .category-card p {
+            color: #666;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
         }
         
         .faq-section {
@@ -66,6 +265,7 @@
             border-radius: 8px;
             overflow: hidden;
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            border: 1px solid #eee;
         }
         
         .faq-question {
@@ -75,24 +275,127 @@
             justify-content: space-between;
             align-items: center;
             font-weight: 500;
+            background: white;
+            transition: background 0.3s;
+        }
+        
+        .faq-question:hover {
+            background: #f9f9f9;
         }
         
         .faq-answer {
             padding: 0 1.5rem 1.5rem;
             display: none;
+            color: #666;
+            line-height: 1.6;
         }
         
         .service-locations {
             padding: 4rem 0;
         }
+        
+        .location-search {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        
+        .location-search input {
+            padding: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+            min-width: 300px;
+        }
+        
+        .location-list {
+            text-align: center;
+            color: #666;
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .main-header .container {
+                flex-wrap: wrap;
+                padding: 10px 20px;
+            }
+            
+            .nav-list {
+                flex-direction: column;
+                width: 100%;
+                display: none;
+                background: white;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+                padding: 20px 0;
+            }
+            
+            .nav-list.active {
+                display: flex;
+            }
+            
+            .nav-list li {
+                width: 100%;
+                text-align: center;
+                border-bottom: 1px solid #eee;
+            }
+            
+            .nav-list a {
+                display: block;
+                padding: 15px;
+            }
+            
+            .hamburger-menu {
+                display: flex;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .category-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .location-search {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .location-search input {
+                min-width: auto;
+                width: 100%;
+                max-width: 300px;
+            }
+        }
+
+        /* 动画效果 */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.5s ease-in;
+        }
     </style>
+    <link rel="icon" href="./images/favicon.ico">
 </head>
 <body>
     <header class="main-header">
         <div class="container">
             <div class="logo">
                 <a href="index.html">
-                    <img src="/myweb/images/v2-7d24d51ddb74c9416b6d4f7e353fb8a5_r.png" alt="华为Logo">
+                    <img src="./images/v2-7d24d51ddb74c9416b6d4f7e353fb8a5_r.png" alt="华为Logo">
                 </a>
             </div>
             <nav class="main-nav">
@@ -192,6 +495,24 @@
                         <p>可以通过华为官网服务支持页面、"我的华为"APP或拨打客服热线950800进行预约。</p>
                     </div>
                 </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        设备无法开机怎么办？
+                        <span>+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>请先尝试充电30分钟以上，然后长按电源键10秒以上强制重启。如果仍然无法开机，请前往华为授权服务中心检测。</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        如何更新系统？
+                        <span>+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>进入设置 > 系统和更新 > 软件更新，检查是否有新版本。建议在WiFi环境下下载更新，并确保电量充足。</p>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -201,11 +522,10 @@
         <div class="container">
             <h2 class="section-title">服务网点查询</h2>
             <div class="location-search">
-                <input type="text" placeholder="输入城市或地区" style="padding: 1rem; width: 300px; margin-right: 1rem;">
+                <input type="text" placeholder="输入城市或地区">
                 <button class="cta-button">搜索</button>
             </div>
             <div class="location-list">
-                <!-- 这里可以动态加载服务网点 -->
                 <p>请输入您所在的城市查询最近的华为授权服务中心。</p>
             </div>
         </div>
@@ -245,29 +565,202 @@
         </div>
     </footer>
 
-    <script src="/myweb/main.js"></script>
+    <!-- 内联JavaScript -->
     <script>
-        // FAQ展开收起功能
-        document.querySelectorAll('.faq-question').forEach(question => {
-            question.addEventListener('click', () => {
-                const answer = question.nextElementSibling;
-                const isActive = answer.style.display === 'block';
-                
-                // 关闭所有答案
-                document.querySelectorAll('.faq-answer').forEach(ans => {
-                    ans.style.display = 'none';
-                });
-                document.querySelectorAll('.faq-question span').forEach(span => {
-                    span.textContent = '+';
-                });
-                
-                // 切换当前答案
-                if (!isActive) {
-                    answer.style.display = 'block';
-                    question.querySelector('span').textContent = '-';
+    // 华为商城核心功能
+    (function() {
+        'use strict';
+        
+        // 购物车功能
+        class ShoppingCart {
+            constructor() {
+                this.items = this.loadFromStorage();
+                this.init();
+            }
+
+            loadFromStorage() {
+                try {
+                    return JSON.parse(localStorage.getItem('huawei_cart')) || [];
+                } catch (error) {
+                    return [];
                 }
-            });
+            }
+
+            saveToStorage() {
+                try {
+                    localStorage.setItem('huawei_cart', JSON.stringify(this.items));
+                } catch (error) {
+                    console.error('保存购物车失败:', error);
+                }
+            }
+
+            addItem(product) {
+                const existingItem = this.items.find(item => item.id === product.id);
+
+                if (existingItem) {
+                    existingItem.quantity += product.quantity || 1;
+                } else {
+                    this.items.push({
+                        ...product,
+                        quantity: product.quantity || 1,
+                        addedAt: new Date().toISOString()
+                    });
+                }
+
+                this.saveToStorage();
+                this.updateUI();
+            }
+
+            getTotalCount() {
+                return this.items.reduce((total, item) => total + item.quantity, 0);
+            }
+
+            updateUI() {
+                const totalCount = this.getTotalCount();
+                
+                // 更新购物车计数显示
+                document.querySelectorAll('.cart-count').forEach(element => {
+                    element.textContent = totalCount;
+                });
+            }
+
+            init() {
+                this.updateUI();
+            }
+        }
+
+        // 移动菜单功能
+        class MobileMenu {
+            constructor() {
+                this.init();
+            }
+
+            init() {
+                const hamburger = document.querySelector('.hamburger-menu');
+                const navList = document.querySelector('.nav-list');
+                
+                if (hamburger && navList) {
+                    hamburger.addEventListener('click', () => {
+                        navList.classList.toggle('active');
+                        hamburger.classList.toggle('active');
+                    });
+
+                    // 点击外部关闭菜单
+                    document.addEventListener('click', (e) => {
+                        if (!hamburger.contains(e.target) && !navList.contains(e.target)) {
+                            navList.classList.remove('active');
+                            hamburger.classList.remove('active');
+                        }
+                    });
+                }
+            }
+        }
+
+        // FAQ功能
+        class FAQManager {
+            constructor() {
+                this.init();
+            }
+
+            init() {
+                // FAQ展开收起功能
+                document.querySelectorAll('.faq-question').forEach(question => {
+                    question.addEventListener('click', () => {
+                        const answer = question.nextElementSibling;
+                        const isActive = answer.style.display === 'block';
+                        
+                        // 关闭所有答案
+                        document.querySelectorAll('.faq-answer').forEach(ans => {
+                            ans.style.display = 'none';
+                        });
+                        document.querySelectorAll('.faq-question span').forEach(span => {
+                            span.textContent = '+';
+                        });
+                        
+                        // 切换当前答案
+                        if (!isActive) {
+                            answer.style.display = 'block';
+                            question.querySelector('span').textContent = '-';
+                        }
+                    });
+                });
+
+                // 搜索功能
+                const searchInput = document.querySelector('.search-box input');
+                if (searchInput) {
+                    searchInput.addEventListener('keypress', (e) => {
+                        if (e.key === 'Enter') {
+                            this.performSearch(searchInput.value);
+                        }
+                    });
+                }
+
+                // 服务网点搜索
+                const locationSearchBtn = document.querySelector('.location-search .cta-button');
+                if (locationSearchBtn) {
+                    locationSearchBtn.addEventListener('click', () => {
+                        const locationInput = document.querySelector('.location-search input');
+                        if (locationInput && locationInput.value.trim()) {
+                            this.searchServiceLocations(locationInput.value.trim());
+                        }
+                    });
+                }
+            }
+
+            performSearch(query) {
+                if (query.trim()) {
+                    console.log('执行搜索:', query);
+                    // 实际项目中这里会跳转到搜索结果页面或显示搜索结果
+                    alert(`搜索: ${query} - 此功能在演示版本中暂不可用`);
+                }
+            }
+
+            searchServiceLocations(city) {
+                console.log('搜索服务网点:', city);
+                // 实际项目中这里会显示该城市的服务网点
+                const locationList = document.querySelector('.location-list');
+                if (locationList) {
+                    locationList.innerHTML = `
+                        <h3>${city}的华为授权服务中心</h3>
+                        <div style="margin-top: 1rem;">
+                            <p>📍 ${city}华为客户服务中心（旗舰店）</p>
+                            <p>地址：${city}市某某区某某路123号</p>
+                            <p>电话：400-830-8300</p>
+                            <p>营业时间：9:00-18:00</p>
+                        </div>
+                        <div style="margin-top: 1rem;">
+                            <p>📍 ${city}华为授权服务中心（某某店）</p>
+                            <p>地址：${city}市某某区某某路456号</p>
+                            <p>电话：400-830-8300</p>
+                            <p>营业时间：9:00-18:00</p>
+                        </div>
+                    `;
+                }
+            }
+        }
+
+        // 主应用类
+        class HuaweiStore {
+            constructor() {
+                this.cart = new ShoppingCart();
+                this.mobileMenu = new MobileMenu();
+                this.faqManager = new FAQManager();
+                this.init();
+            }
+
+            init() {
+                console.log('华为服务支持页面初始化完成');
+                document.body.classList.add('fade-in');
+            }
+        }
+
+        // 初始化
+        document.addEventListener('DOMContentLoaded', function() {
+            window.huaweiStore = new HuaweiStore();
+            console.log('华为服务支持页面加载完成');
         });
+
+    })();
     </script>
 </body>
 </html>
