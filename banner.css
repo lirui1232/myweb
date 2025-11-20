@@ -1,0 +1,162 @@
+/* 主轮播图样式 */
+.main-banner {
+    margin-top: 70px; /* 为固定导航栏留出空间 */
+    position: relative;
+    overflow: hidden;
+    height: 600px;
+}
+
+.banner-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.banner-slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 0.8s ease-in-out;
+}
+
+.banner-slide.active {
+    opacity: 1;
+}
+
+.banner-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.banner-content {
+    position: absolute;
+    top: 50%;
+    left: 10%;
+    transform: translateY(-50%);
+    color: #fff;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    max-width: 500px;
+}
+
+.banner-content h2 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    font-weight: bold;
+}
+
+.banner-content p {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    line-height: 1.6;
+}
+
+.banner-content .cta-button {
+    background-color: #fff;
+    color: #c7000a;
+    font-weight: bold;
+    padding: 15px 40px;
+    font-size: 1.1rem;
+}
+
+.banner-content .cta-button:hover {
+    background-color: #f8f8f8;
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+/* 轮播指示器 */
+.banner-indicators {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 10px;
+}
+
+.indicator {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.indicator.active {
+    background-color: #fff;
+    transform: scale(1.2);
+}
+
+.indicator:hover {
+    background-color: rgba(255, 255, 255, 0.8);
+}
+
+/* 响应式轮播图 */
+@media (max-width: 768px) {
+    .main-banner {
+        height: 400px;
+    }
+
+    .banner-content {
+        left: 5%;
+        right: 5%;
+        text-align: center;
+    }
+
+    .banner-content h2 {
+        font-size: 2rem;
+    }
+
+    .banner-content p {
+        font-size: 1rem;
+    }
+
+    .banner-content .cta-button {
+        padding: 12px 30px;
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .main-banner {
+        height: 300px;
+    }
+
+    .banner-content h2 {
+        font-size: 1.5rem;
+    }
+
+    .banner-content p {
+        font-size: 0.9rem;
+        margin-bottom: 1.5rem;
+    }
+}
+/* 确保轮播图正确隐藏非活动项 */
+.banner-slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 0.8s ease-in-out;
+    pointer-events: none; /* 非活动项不能点击 */
+}
+
+.banner-slide.active {
+    opacity: 1;
+    pointer-events: auto; /* 只有活动项可以点击 */
+}
+
+/* 确保轮播图容器有正确的定位 */
+.banner-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
