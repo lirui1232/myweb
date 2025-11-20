@@ -4,264 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>华为 - 构建万物互联的智能世界</title>
-    
-    <!-- 方法1：直接内联关键CSS，确保基本样式 -->
-    <style>
-        /* 基础重置 */
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { 
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; 
-            line-height: 1.6;
-            color: #333;
-            background: #f8f9fa;
-        }
-        
-        /* 头部样式 */
-        .main-header {
-            background: white;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            position: fixed;
-            top: 0;
-            width: 100%;
-            z-index: 1000;
-            height: 70px;
-        }
-        .header-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            height: 70px;
-        }
-        .logo img {
-            height: 40px;
-            width: auto;
-        }
-        .nav-list {
-            display: flex;
-            list-style: none;
-            gap: 2rem;
-        }
-        .nav-list a {
-            text-decoration: none;
-            color: #333;
-            font-weight: 500;
-            transition: color 0.3s;
-        }
-        .nav-list a:hover {
-            color: #c7000a;
-        }
-        .nav-list a.active {
-            color: #c7000a;
-        }
-        .header-actions {
-            display: flex;
-            gap: 1rem;
-        }
-        .login-btn, .cart-btn {
-            padding: 8px 16px;
-            text-decoration: none;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            color: #333;
-            transition: all 0.3s;
-        }
-        .login-btn:hover, .cart-btn:hover {
-            border-color: #c7000a;
-            color: #c7000a;
-        }
-        
-        /* 主内容区域 */
-        .main-content {
-            margin-top: 70px;
-            min-height: calc(100vh - 70px);
-        }
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-        
-        /* 产品网格 */
-        .products-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-            margin: 2rem 0;
-        }
-        .product-card {
-            background: white;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            transition: transform 0.3s;
-        }
-        .product-card:hover {
-            transform: translateY(-5px);
-        }
-        .product-image {
-            width: 100%;
-            height: 200px;
-            background: #f5f5f5;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .product-image img {
-            max-width: 80%;
-            max-height: 80%;
-            object-fit: contain;
-        }
-        .product-info {
-            padding: 1.5rem;
-        }
-        .product-info h3 {
-            margin-bottom: 0.5rem;
-            color: #333;
-        }
-        .product-info p {
-            color: #666;
-            margin-bottom: 1rem;
-        }
-        .price {
-            font-size: 1.5rem;
-            color: #c7000a;
-            font-weight: bold;
-            margin-bottom: 1rem;
-        }
-        .cta-button {
-            display: inline-block;
-            background: #c7000a;
-            color: white;
-            padding: 10px 20px;
-            border-radius: 4px;
-            text-decoration: none;
-            font-weight: 500;
-            transition: background 0.3s;
-        }
-        .cta-button:hover {
-            background: #a80008;
-        }
-        
-        /* 页脚 */
-        .main-footer {
-            background: #2d3748;
-            color: white;
-            padding: 3rem 0;
-            margin-top: 4rem;
-        }
-        .footer-content {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 2rem;
-        }
-        .footer-section h4 {
-            margin-bottom: 1rem;
-            color: #e2e8f0;
-        }
-        .footer-section ul {
-            list-style: none;
-        }
-        .footer-section li {
-            margin-bottom: 0.5rem;
-        }
-        .footer-section a {
-            color: #cbd5e0;
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-        .footer-section a:hover {
-            color: white;
-        }
-        .footer-bottom {
-            border-top: 1px solid #4a5568;
-            margin-top: 2rem;
-            padding-top: 2rem;
-            text-align: center;
-            color: #a0aec0;
-        }
-    </style>
-    
-    <!-- 方法2：动态加载外部CSS -->
-    <script>
-        // 动态加载CSS文件
-        function loadCSS(filename) {
-            return new Promise((resolve, reject) => {
-                // 尝试多种路径
-                const paths = [
-                    `/myweb/css/${filename}`,
-                    `css/${filename}`,
-                    `./css/${filename}`,
-                    `${filename}`
-                ];
-                
-                let loaded = false;
-                
-                paths.forEach(path => {
-                    if (loaded) return;
-                    
-                    const link = document.createElement('link');
-                    link.rel = 'stylesheet';
-                    link.href = path;
-                    link.onload = () => {
-                        if (!loaded) {
-                            loaded = true;
-                            console.log(`✅ CSS加载成功: ${path}`);
-                            resolve();
-                        }
-                    };
-                    link.onerror = () => {
-                        console.log(`❌ CSS加载失败: ${path}`);
-                    };
-                    
-                    document.head.appendChild(link);
-                });
-                
-                // 如果所有路径都失败，3秒后重试
-                setTimeout(() => {
-                    if (!loaded) {
-                        console.warn('CSS加载超时，使用内联样式');
-                        resolve();
-                    }
-                }, 3000);
-            });
-        }
-        
-        // 页面加载前尝试加载CSS
-        if (document.readyState === 'loading') {
-            Promise.all([
-                loadCSS('style.css'),
-                loadCSS('header.css'),
-                loadCSS('banner.css'),
-                loadCSS('responsive.css')
-            ]).catch(error => {
-                console.warn('部分CSS加载失败，使用备用样式');
-            });
-        }
-    </script>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/banner.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="icon" href="images/favicon.ico" type="image/x-icon">
 </head>
 <body>
-    <!-- 调试面板 -->
-    <div id="debug-panel" style="position: fixed; top: 10px; left: 10px; background: rgba(0,0,0,0.8); color: white; padding: 10px; border-radius: 5px; z-index: 10000; font-size: 12px;">
-        <div>状态: <span id="debug-status">加载中...</span></div>
-        <div>环境: <span id="debug-env">检测中...</span></div>
-        <button onclick="toggleDebug()" style="margin-top: 5px; padding: 2px 5px; font-size: 10px;">隐藏</button>
-    </div>
-
     <!-- 顶部导航栏 -->
     <header class="main-header">
-        <div class="header-container">
+        <div class="container">
             <div class="logo">
                 <a href="index.html">
-                    <!-- 图片将通过JS加载 -->
-                    <span style="color: #c7000a; font-weight: bold; font-size: 1.5rem;">HUAWEI</span>
+                    <img src="images/v2-7d24d51ddb74c9416b6d4f7e353fb8a5_r.png" alt="华为Logo">
                 </a>
             </div>
             <nav class="main-nav">
                 <ul class="nav-list">
-                    <li><a href="smartphones.html" class="active">智能手机</a></li>
+                    <li><a href="smartphones.html">智能手机</a></li>
                     <li><a href="laptops-tablets.html">笔记本&平板</a></li>
                     <li><a href="wearables.html">智能穿戴</a></li>
                     <li><a href="smart-screen.html">智慧屏</a></li>
@@ -276,62 +36,54 @@
         </div>
     </header>
 
-    <!-- 主内容区 -->
-    <main class="main-content">
-        <div class="container">
-            <!-- 欢迎横幅 -->
-            <section style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 4rem 2rem; border-radius: 12px; text-align: center; margin: 2rem 0;">
-                <h1 style="font-size: 3rem; margin-bottom: 1rem;">华为官方商城</h1>
-                <p style="font-size: 1.2rem; margin-bottom: 2rem;">构建万物互联的智能世界</p>
-                <a href="#products" class="cta-button" style="background: white; color: #764ba2;">探索产品</a>
-            </section>
+    <!-- 主轮播图 -->
+    <section class="main-banner">
+        <div class="banner-container">
+            <div class="banner-slide active">
+                <img src="images/7bbc07c3438ad547fc9ea5043839fc4e-5959a6dc-f1d8-41cb-ac21-eee844f719e2.png" alt="华为Mate 60 Pro">
+                <div class="banner-content">
+                    <h2>华为Mate 60系列</h2>
+                    <p>超越想象的科技创新</p>
+                    <a href="product-detail.html?id=mate60-pro" class="cta-button">立即购买</a>
+                </div>
+            </div>
+            
+            <div class="banner-slide">
+                <img src="images/913c0e78b02d1bb95998965a77705a25-3bbd8c55-0e64-41c7-89f9-156c202ca1ea.png" alt="华为P60 Pro">
+                <div class="banner-content">
+                    <h2>华为P60 Pro</h2>
+                    <p>影像科技新高度</p>
+                    <a href="product-detail.html?id=p60-pro" class="cta-button">立即购买</a>
+                </div>
+            </div>
+            
+            <!-- 轮播指示器 -->
+            <div class="banner-indicators">
+                <span class="indicator active"></span>
+                <span class="indicator"></span>
+            </div>
+        </div>
+    </section>
 
-            <!-- 产品展示 -->
-            <section id="products">
-                <h2 style="text-align: center; margin: 3rem 0 2rem; font-size: 2.5rem;">热门产品</h2>
-                <div class="products-grid">
-                    <!-- 产品1 -->
-                    <div class="product-card">
-                        <div class="product-image">
-                            <img id="product-img-1" alt="华为手机">
-                        </div>
-                        <div class="product-info">
-                            <h3>华为P系列</h3>
-                            <p>影像科技新高度</p>
-                            <div class="price">¥3999起</div>
-                            <a href="smartphones.html" class="cta-button">了解详情</a>
-                        </div>
+    <!-- 产品展示区 -->
+    <section class="products-section">
+        <div class="container">
+            <h2 class="section-title">热门产品</h2>
+            <div class="products-grid">
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="images/eaedc3a61230bcd1007a3a3f3f152779.jpg" alt="华为手机">
                     </div>
-                    
-                    <!-- 产品2 -->
-                    <div class="product-card">
-                        <div class="product-image">
-                            <img id="product-img-2" alt="华为笔记本">
-                        </div>
-                        <div class="product-info">
-                            <h3>MateBook</h3>
-                            <p>轻薄本，高性能</p>
-                            <div class="price">¥5999起</div>
-                            <a href="laptops-tablets.html" class="cta-button">了解详情</a>
-                        </div>
-                    </div>
-                    
-                    <!-- 产品3 -->
-                    <div class="product-card">
-                        <div class="product-image">
-                            <img id="product-img-3" alt="智能手表">
-                        </div>
-                        <div class="product-info">
-                            <h3>智能穿戴</h3>
-                            <p>健康生活，智慧随行</p>
-                            <div class="price">¥1499起</div>
-                            <a href="wearables.html" class="cta-button">了解详情</a>
-                        </div>
+                    <div class="product-info">
+                        <h3>华为P系列</h3>
+                        <p>影像科技新高度</p>
+                        <span class="price">¥3999起</span>
                     </div>
                 </div>
-            </section>
+                <!-- 更多产品卡片 -->
+            </div>
         </div>
-    </main>
+    </section>
 
     <!-- 页脚 -->
     <footer class="main-footer">
@@ -368,164 +120,6 @@
         </div>
     </footer>
 
-    <!-- 强力路径修复和功能脚本 -->
-    <script>
-        // 配置
-        const CONFIG = {
-            basePath: window.location.hostname.includes('github.io') ? '/myweb/' : '',
-            images: {
-                logo: 'v2-7d24d51ddb74c9416b6d4f7e353fb8a5_r.png',
-                product1: 'eaedc3a61230bcd1007a3a3f3f152779.jpg',
-                product2: '91870f814bc8610c3695e8a80de1c16c.jpg',
-                product3: '635fb3c0fd8edde447d66b5130e931d6.jpg'
-            }
-        };
-        
-        // 更新调试信息
-        function updateDebugInfo() {
-            document.getElementById('debug-env').textContent = 
-                CONFIG.basePath ? 'GitHub Pages' : '本地环境';
-            document.getElementById('debug-status').textContent = '运行中';
-        }
-        
-        // 切换调试面板显示
-        function toggleDebug() {
-            const panel = document.getElementById('debug-panel');
-            panel.style.display = panel.style.display === 'none' ? 'block' : 'none';
-        }
-        
-        // 加载图片
-        function loadImage(elementId, imageName) {
-            const paths = [
-                `${CONFIG.basePath}images/${imageName}`,
-                `images/${imageName}`,
-                `./images/${imageName}`,
-                `/myweb/images/${imageName}`
-            ];
-            
-            const imgElement = document.getElementById(elementId);
-            if (!imgElement) return;
-            
-            let loaded = false;
-            
-            paths.forEach(path => {
-                if (loaded) return;
-                
-                const testImg = new Image();
-                testImg.onload = function() {
-                    if (!loaded) {
-                        loaded = true;
-                        imgElement.src = path;
-                        console.log(`✅ 图片加载成功: ${path}`);
-                    }
-                };
-                testImg.onerror = function() {
-                    console.log(`❌ 图片加载失败: ${path}`);
-                };
-                testImg.src = path;
-            });
-        }
-        
-        // 修复所有链接
-        function fixAllLinks() {
-            document.querySelectorAll('a').forEach(link => {
-                const href = link.getAttribute('href');
-                if (href && !href.startsWith('http') && !href.startsWith('#') && !href.startsWith('/')) {
-                    link.href = CONFIG.basePath + href;
-                }
-            });
-        }
-        
-        // 加载外部JS
-        function loadJS(filename) {
-            return new Promise((resolve, reject) => {
-                const paths = [
-                    `${CONFIG.basePath}js/${filename}`,
-                    `js/${filename}`,
-                    `./js/${filename}`,
-                    `${filename}`
-                ];
-                
-                let loaded = false;
-                
-                paths.forEach(path => {
-                    if (loaded) return;
-                    
-                    const script = document.createElement('script');
-                    script.src = path;
-                    script.onload = () => {
-                        if (!loaded) {
-                            loaded = true;
-                            console.log(`✅ JS加载成功: ${path}`);
-                            resolve();
-                        }
-                    };
-                    script.onerror = () => {
-                        console.log(`❌ JS加载失败: ${path}`);
-                    };
-                    
-                    document.body.appendChild(script);
-                });
-                
-                setTimeout(() => {
-                    if (!loaded) {
-                        console.warn('JS加载超时');
-                        resolve();
-                    }
-                }, 3000);
-            });
-        }
-        
-        // 购物车功能（备用）
-        function updateCartCount() {
-            try {
-                const cartItems = JSON.parse(localStorage.getItem('huawei_cart')) || [];
-                const totalItems = cartItems.reduce((total, item) => total + (item.quantity || 0), 0);
-                document.querySelectorAll('.cart-count').forEach(element => {
-                    element.textContent = totalItems;
-                });
-            } catch (error) {
-                console.warn('购物车功能初始化失败:', error);
-            }
-        }
-        
-        // 页面初始化
-        document.addEventListener('DOMContentLoaded', function() {
-            console.log('🚀 页面初始化开始');
-            updateDebugInfo();
-            
-            // 修复链接
-            fixAllLinks();
-            
-            // 加载图片
-            loadImage('product-img-1', CONFIG.images.product1);
-            loadImage('product-img-2', CONFIG.images.product2);
-            loadImage('product-img-3', CONFIG.images.product3);
-            
-            // 尝试加载外部JS
-            loadJS('script.js').then(() => {
-                // 如果外部JS加载成功，使用它的功能
-                if (typeof updateCartCount === 'undefined') {
-                    // 如果外部JS没有提供购物车功能，使用备用功能
-                    updateCartCount();
-                }
-            }).catch(() => {
-                // 如果外部JS加载失败，使用备用功能
-                updateCartCount();
-            });
-            
-            console.log('✅ 页面初始化完成');
-        });
-        
-        // 最终检查
-        setTimeout(() => {
-            const stylesheets = Array.from(document.styleSheets);
-            const externalCSS = stylesheets.filter(sheet => sheet.href && !sheet.href.includes('blob:'));
-            console.log('📊 最终检查:');
-            console.log('- 外部CSS文件:', externalCSS.length);
-            console.log('- 环境:', CONFIG.basePath ? 'GitHub Pages' : '本地');
-            console.log('- 页面元素:', document.querySelectorAll('*').length);
-        }, 2000);
-    </script>
+    <script src="js/script.js"></script>
 </body>
 </html>
