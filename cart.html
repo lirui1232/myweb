@@ -4,9 +4,171 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>购物车 - 华为官方商城</title>
-    <link rel="stylesheet" href="css/main.css">
-    <link rel="icon" href="/myweb/images/favicon.ico">
     <style>
+        /* 在这里粘贴与index.html相同的基础CSS代码 */
+        /* 基础重置和全局样式 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #fff;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* 头部导航样式 */
+        .main-header {
+            background: #fff;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .main-header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+        }
+
+        .logo img {
+            height: 40px;
+            width: auto;
+        }
+
+        .nav-list {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        .nav-list a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s;
+            font-size: 16px;
+        }
+
+        .nav-list a:hover,
+        .nav-list a.active {
+            color: #c7000a;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .login-btn, .cart-btn {
+            text-decoration: none;
+            color: #333;
+            padding: 8px 16px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            transition: all 0.3s;
+            font-size: 14px;
+        }
+
+        .login-btn:hover, .cart-btn:hover {
+            background: #f5f5f5;
+            border-color: #c7000a;
+        }
+
+        .hamburger-menu {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 3px;
+        }
+
+        .hamburger-menu span {
+            width: 25px;
+            height: 3px;
+            background: #333;
+            transition: 0.3s;
+        }
+
+        /* 页脚样式 */
+        .main-footer {
+            background: #f8f8f8;
+            padding: 50px 0 20px;
+            margin-top: 50px;
+            border-top: 1px solid #eee;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 30px;
+        }
+
+        .footer-section h4 {
+            margin-bottom: 20px;
+            color: #333;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section li {
+            margin-bottom: 10px;
+        }
+
+        .footer-section a {
+            text-decoration: none;
+            color: #666;
+            transition: color 0.3s;
+            font-size: 14px;
+        }
+
+        .footer-section a:hover {
+            color: #c7000a;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+            color: #666;
+            font-size: 14px;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 12px 30px;
+            background: #c7000a;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: background 0.3s;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .cta-button:hover {
+            background: #a00008;
+        }
+
+        /* 购物车特有样式 */
         .cart-container {
             margin-top: 70px;
             padding: 2rem 0;
@@ -28,6 +190,7 @@
             border-radius: 12px;
             padding: 2rem;
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border: 1px solid #eee;
         }
         
         .cart-item {
@@ -67,6 +230,7 @@
         .item-details p {
             color: #666;
             margin: 0.2rem 0;
+            font-size: 14px;
         }
         
         .quantity-controls {
@@ -85,6 +249,12 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            transition: all 0.3s;
+        }
+
+        .quantity-btn:hover {
+            background: #f5f5f5;
+            border-color: #c7000a;
         }
         
         .quantity-input {
@@ -107,6 +277,11 @@
             border: none;
             cursor: pointer;
             font-size: 1.2rem;
+            transition: color 0.3s;
+        }
+
+        .remove-btn:hover {
+            color: #c7000a;
         }
         
         .cart-summary {
@@ -117,6 +292,7 @@
             height: fit-content;
             position: sticky;
             top: 100px;
+            border: 1px solid #eee;
         }
         
         .summary-row {
@@ -160,15 +336,90 @@
         .empty-cart-icon {
             font-size: 4rem;
             margin-bottom: 1rem;
+            color: #ccc;
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .main-header .container {
+                flex-wrap: wrap;
+                padding: 10px 20px;
+            }
+            
+            .nav-list {
+                flex-direction: column;
+                width: 100%;
+                display: none;
+                background: white;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+                padding: 20px 0;
+            }
+            
+            .nav-list.active {
+                display: flex;
+            }
+            
+            .nav-list li {
+                width: 100%;
+                text-align: center;
+                border-bottom: 1px solid #eee;
+            }
+            
+            .nav-list a {
+                display: block;
+                padding: 15px;
+            }
+            
+            .hamburger-menu {
+                display: flex;
+            }
+            
+            .cart-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .cart-item {
+                grid-template-columns: 80px 1fr;
+                gap: 0.5rem;
+            }
+            
+            .item-image {
+                width: 80px;
+                height: 80px;
+            }
+            
+            .quantity-controls, .item-price, .remove-btn {
+                grid-column: 1 / -1;
+                justify-self: start;
+                margin-top: 0.5rem;
+            }
+            
+            .cart-summary {
+                position: static;
+            }
+        }
+
+        /* 动画效果 */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.5s ease-in;
         }
     </style>
+    <link rel="icon" href="./images/favicon.ico">
 </head>
 <body>
     <header class="main-header">
         <div class="container">
             <div class="logo">
                 <a href="index.html">
-                    <img src="/myweb/images/v2-7d24d51ddb74c9416b6d4f7e353fb8a5_r.png" alt="华为Logo">
+                    <img src="./images/v2-7d24d51ddb74c9416b6d4f7e353fb8a5_r.png" alt="华为Logo">
                 </a>
             </div>
             <nav class="main-nav">
@@ -247,127 +498,283 @@
         </div>
     </footer>
 
-    <script src="/myweb/main.js"></script>
+    <!-- 内联JavaScript -->
     <script>
+    // 华为商城核心功能
+    (function() {
+        'use strict';
+        
         // 购物车功能
-        let cartItems = JSON.parse(localStorage.getItem('huawei_cart')) || [];
-        
-        function renderCart() {
-            const cartContent = document.getElementById('cart-content');
-            
-            if (cartItems.length === 0) {
-                cartContent.innerHTML = `
-                    <div class="empty-cart">
-                        <div class="empty-cart-icon">🛒</div>
-                        <h2>购物车为空</h2>
-                        <p>您还没有添加任何商品到购物车</p>
-                        <a href="/myweb/smartphones.html" class="cta-button" style="margin-top: 1rem;">去购物</a>
-                    </div>
-                `;
-                return;
+        class ShoppingCart {
+            constructor() {
+                this.items = this.loadFromStorage();
+                this.init();
             }
-            
-            let itemsHTML = '';
-            let subtotal = 0;
-            
-            cartItems.forEach((item, index) => {
-                const itemTotal = item.price * item.quantity;
-                subtotal += itemTotal;
+
+            loadFromStorage() {
+                try {
+                    return JSON.parse(localStorage.getItem('huawei_cart')) || [];
+                } catch (error) {
+                    return [];
+                }
+            }
+
+            saveToStorage() {
+                try {
+                    localStorage.setItem('huawei_cart', JSON.stringify(this.items));
+                } catch (error) {
+                    console.error('保存购物车失败:', error);
+                }
+            }
+
+            addItem(product) {
+                const existingItem = this.items.find(item => 
+                    item.id === product.id && 
+                    item.color === product.color && 
+                    item.config === product.config
+                );
+
+                if (existingItem) {
+                    existingItem.quantity += product.quantity || 1;
+                } else {
+                    this.items.push({
+                        ...product,
+                        quantity: product.quantity || 1,
+                        addedAt: new Date().toISOString()
+                    });
+                }
+
+                this.saveToStorage();
+                this.updateUI();
+            }
+
+            removeItem(index) {
+                this.items.splice(index, 1);
+                this.saveToStorage();
+                this.render();
+                this.updateUI();
+            }
+
+            updateQuantity(index, change) {
+                const newQuantity = this.items[index].quantity + change;
+                if (newQuantity < 1) return;
                 
-                itemsHTML += `
-                    <div class="cart-item">
-                        <div class="item-image">
-                            <img src="${item.image}" alt="${item.name}">
+                this.items[index].quantity = newQuantity;
+                this.saveToStorage();
+                this.render();
+                this.updateUI();
+            }
+
+            updateQuantityInput(index, value) {
+                const newQuantity = parseInt(value);
+                if (newQuantity < 1) return;
+                
+                this.items[index].quantity = newQuantity;
+                this.saveToStorage();
+                this.render();
+                this.updateUI();
+            }
+
+            getTotalCount() {
+                return this.items.reduce((total, item) => total + item.quantity, 0);
+            }
+
+            getTotalPrice() {
+                return this.items.reduce((total, item) => total + (item.price * item.quantity), 0);
+            }
+
+            clear() {
+                this.items = [];
+                this.saveToStorage();
+                this.render();
+                this.updateUI();
+            }
+
+            updateUI() {
+                const totalCount = this.getTotalCount();
+                
+                // 更新购物车计数显示
+                document.querySelectorAll('.cart-count').forEach(element => {
+                    element.textContent = totalCount;
+                });
+            }
+
+            render() {
+                const cartContent = document.getElementById('cart-content');
+                
+                if (this.items.length === 0) {
+                    cartContent.innerHTML = `
+                        <div class="empty-cart">
+                            <div class="empty-cart-icon">🛒</div>
+                            <h2>购物车为空</h2>
+                            <p>您还没有添加任何商品到购物车</p>
+                            <a href="smartphones.html" class="cta-button" style="margin-top: 1rem; display: inline-block;">去购物</a>
                         </div>
-                        <div class="item-details">
-                            <h3>${item.name}</h3>
-                            <p>颜色：${item.color}</p>
-                            <p>版本：${item.config}</p>
+                    `;
+                    return;
+                }
+                
+                let itemsHTML = '';
+                let subtotal = this.getTotalPrice();
+                
+                this.items.forEach((item, index) => {
+                    const itemTotal = item.price * item.quantity;
+                    
+                    itemsHTML += `
+                        <div class="cart-item">
+                            <div class="item-image">
+                                <img src="${item.image || './images/default-product.jpg'}" alt="${item.name}">
+                            </div>
+                            <div class="item-details">
+                                <h3>${item.name}</h3>
+                                <p>颜色：${item.color || '默认'}</p>
+                                <p>版本：${item.config || '标准版'}</p>
+                            </div>
+                            <div class="quantity-controls">
+                                <button class="quantity-btn" onclick="window.huaweiStore.cart.updateQuantity(${index}, -1)">-</button>
+                                <input type="number" class="quantity-input" value="${item.quantity}" min="1" onchange="window.huaweiStore.cart.updateQuantityInput(${index}, this.value)">
+                                <button class="quantity-btn" onclick="window.huaweiStore.cart.updateQuantity(${index}, 1)">+</button>
+                            </div>
+                            <div class="item-price">¥${itemTotal}</div>
+                            <button class="remove-btn" onclick="window.huaweiStore.cart.removeItem(${index})">×</button>
                         </div>
-                        <div class="quantity-controls">
-                            <button class="quantity-btn" onclick="updateQuantity(${index}, -1)">-</button>
-                            <input type="number" class="quantity-input" value="${item.quantity}" min="1" onchange="updateQuantityInput(${index}, this.value)">
-                            <button class="quantity-btn" onclick="updateQuantity(${index}, 1)">+</button>
+                    `;
+                });
+                
+                cartContent.innerHTML = `
+                    <div class="cart-content">
+                        <div class="cart-items">
+                            ${itemsHTML}
                         </div>
-                        <div class="item-price">¥${itemTotal}</div>
-                        <button class="remove-btn" onclick="removeItem(${index})">×</button>
+                        <div class="cart-summary">
+                            <h3>订单摘要</h3>
+                            <div class="summary-row">
+                                <span>小计</span>
+                                <span>¥${subtotal}</span>
+                            </div>
+                            <div class="summary-row">
+                                <span>运费</span>
+                                <span>免费</span>
+                            </div>
+                            <div class="summary-row">
+                                <span>优惠</span>
+                                <span>-¥0</span>
+                            </div>
+                            <div class="summary-row summary-total">
+                                <span>总计</span>
+                                <span>¥${subtotal}</span>
+                            </div>
+                            <button class="checkout-btn" onclick="window.huaweiStore.checkout()">立即结算</button>
+                            <div style="text-align: center; margin-top: 1rem;">
+                                <a href="smartphones.html" style="color: #666; text-decoration: none;">继续购物</a>
+                            </div>
+                        </div>
                     </div>
                 `;
-            });
-            
-            cartContent.innerHTML = `
-                <div class="cart-content">
-                    <div class="cart-items">
-                        ${itemsHTML}
+            }
+
+            init() {
+                this.render();
+                this.updateUI();
+            }
+        }
+
+        // 移动菜单功能
+        class MobileMenu {
+            constructor() {
+                this.init();
+            }
+
+            init() {
+                const hamburger = document.querySelector('.hamburger-menu');
+                const navList = document.querySelector('.nav-list');
+                
+                if (hamburger && navList) {
+                    hamburger.addEventListener('click', () => {
+                        navList.classList.toggle('active');
+                        hamburger.classList.toggle('active');
+                    });
+
+                    // 点击外部关闭菜单
+                    document.addEventListener('click', (e) => {
+                        if (!hamburger.contains(e.target) && !navList.contains(e.target)) {
+                            navList.classList.remove('active');
+                            hamburger.classList.remove('active');
+                        }
+                    });
+                }
+            }
+        }
+
+        // 主应用类
+        class HuaweiStore {
+            constructor() {
+                this.cart = new ShoppingCart();
+                this.mobileMenu = new MobileMenu();
+                this.init();
+            }
+
+            init() {
+                console.log('华为购物车页面初始化完成');
+                document.body.classList.add('fade-in');
+            }
+
+            checkout() {
+                if (this.cart.items.length === 0) {
+                    alert('购物车为空，无法结算');
+                    return;
+                }
+                
+                alert('结算功能将在实际项目中实现\n总金额：¥' + this.cart.getTotalPrice());
+                // 实际项目中这里会跳转到结算页面
+            }
+        }
+
+        // 全局函数
+        window.addToCart = function(product) {
+            if (window.huaweiStore && window.huaweiStore.cart) {
+                window.huaweiStore.cart.addItem(product);
+                
+                // 显示添加成功提示
+                const notification = document.createElement('div');
+                notification.innerHTML = `
+                    <div style="padding: 10px;">
+                        <strong>✅ 已添加到购物车</strong>
+                        <p style="margin: 5px 0;">${product.name}</p>
                     </div>
-                    <div class="cart-summary">
-                        <h3>订单摘要</h3>
-                        <div class="summary-row">
-                            <span>小计</span>
-                            <span>¥${subtotal}</span>
-                        </div>
-                        <div class="summary-row">
-                            <span>运费</span>
-                            <span>免费</span>
-                        </div>
-                        <div class="summary-row">
-                            <span>优惠</span>
-                            <span>-¥0</span>
-                        </div>
-                        <div class="summary-row summary-total">
-                            <span>总计</span>
-                            <span>¥${subtotal}</span>
-                        </div>
-                        <button class="checkout-btn" onclick="checkout()">立即结算</button>
-                        <div style="text-align: center; margin-top: 1rem;">
-                            <a href="smartphones.html" style="color: #666; text-decoration: none;">继续购物</a>
-                        </div>
-                    </div>
-                </div>
-            `;
-            
-            updateCartCount();
-        }
-        
-        function updateQuantity(index, change) {
-            const newQuantity = cartItems[index].quantity + change;
-            if (newQuantity < 1) return;
-            
-            cartItems[index].quantity = newQuantity;
-            localStorage.setItem('huawei_cart', JSON.stringify(cartItems));
-            renderCart();
-        }
-        
-        function updateQuantityInput(index, value) {
-            const newQuantity = parseInt(value);
-            if (newQuantity < 1) return;
-            
-            cartItems[index].quantity = newQuantity;
-            localStorage.setItem('huawei_cart', JSON.stringify(cartItems));
-            renderCart();
-        }
-        
-        function removeItem(index) {
-            cartItems.splice(index, 1);
-            localStorage.setItem('huawei_cart', JSON.stringify(cartItems));
-            renderCart();
-        }
-        
-        function checkout() {
-            alert('结算功能将在实际项目中实现');
-            // 实际项目中这里会跳转到结算页面
-        }
-        
-        function updateCartCount() {
-            const totalItems = cartItems.reduce((total, item) => total + item.quantity, 0);
-            document.querySelector('.cart-count').textContent = totalItems;
-        }
-        
-        // 初始化页面
+                `;
+                
+                notification.style.cssText = `
+                    position: fixed;
+                    top: 100px;
+                    right: 20px;
+                    background: white;
+                    border: 2px solid #c7000a;
+                    border-radius: 8px;
+                    padding: 0;
+                    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+                    z-index: 10000;
+                    animation: slideIn 0.3s ease-out;
+                    max-width: 300px;
+                `;
+
+                document.body.appendChild(notification);
+
+                setTimeout(() => {
+                    if (notification.parentNode) {
+                        notification.parentNode.removeChild(notification);
+                    }
+                }, 3000);
+            }
+        };
+
+        // 初始化
         document.addEventListener('DOMContentLoaded', function() {
-            renderCart();
+            window.huaweiStore = new HuaweiStore();
+            console.log('华为购物车页面加载完成');
         });
+
+    })();
     </script>
 </body>
 </html>
-
