@@ -88,6 +88,33 @@
             border-color: #c7000a;
         }
 
+        /* 汉堡菜单样式 */
+        .hamburger-menu {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 3px;
+        }
+
+        .hamburger-menu span {
+            width: 25px;
+            height: 3px;
+            background: #333;
+            transition: 0.3s;
+        }
+
+        .hamburger-menu.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+
+        .hamburger-menu.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger-menu.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -6px);
+        }
+
         /* 主轮播图样式 */
         .main-banner {
             margin-top: 70px;
@@ -342,6 +369,10 @@
                 padding: 15px;
             }
             
+            .hamburger-menu {
+                display: flex;
+            }
+            
             .banner-content h2 {
                 font-size: 2rem;
             }
@@ -413,6 +444,12 @@
             <div class="header-actions">
                 <a href="login.html" class="login-btn">登录</a>
                 <a href="cart.html" class="cart-btn">购物车 <span class="cart-count">0</span></a>
+            </div>
+            <!-- 添加汉堡菜单 -->
+            <div class="hamburger-menu">
+                <span></span>
+                <span></span>
+                <span></span>
             </div>
         </div>
     </header>
@@ -662,11 +699,39 @@
             }
         }
 
+        // 移动菜单功能
+        class MobileMenu {
+            constructor() {
+                this.init();
+            }
+
+            init() {
+                const hamburger = document.querySelector('.hamburger-menu');
+                const navList = document.querySelector('.nav-list');
+                
+                if (hamburger && navList) {
+                    hamburger.addEventListener('click', () => {
+                        navList.classList.toggle('active');
+                        hamburger.classList.toggle('active');
+                    });
+
+                    // 点击外部关闭菜单
+                    document.addEventListener('click', (e) => {
+                        if (!hamburger.contains(e.target) && !navList.contains(e.target)) {
+                            navList.classList.remove('active');
+                            hamburger.classList.remove('active');
+                        }
+                    });
+                }
+            }
+        }
+
         // 主应用类
         class HuaweiStore {
             constructor() {
                 this.cart = new ShoppingCart();
                 this.slider = new BannerSlider();
+                this.mobileMenu = new MobileMenu();
                 this.init();
             }
 
@@ -675,6 +740,13 @@
                 document.body.classList.add('fade-in');
             }
         }
+
+        // 全局函数
+        window.addToCart = function(product) {
+            if (window.huaweiStore && window.huaweiStore.cart) {
+                window.huaweiStore.cart.addItem(product);
+            }
+        };
 
         // 初始化
         document.addEventListener('DOMContentLoaded', function() {
