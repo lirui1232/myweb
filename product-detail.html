@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="page-title">商品详情 - 华为官方商城</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="icon" href="images/favicon.ico">
+    <style>
+        /* 商品详情页专用样式 */
+        .product-detail-hero {
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            padding: 2rem 0;
+            margin-top: 70px;
+        }
+        
+        .product-detail-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: start;
+        }
+        
+        .product-gallery {
+            position: sticky;
+            top: 100px;
+        }
+        
+        .main-image {
+            width: 100%;
+            height: 400px;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .main-image img {
+            max-width: 80%;
+            max-height: 80%;
+            object-fit: contain;
+        }
+        
+        .thumbnail-gallery {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0.5rem;
+        }
+        
+        .thumbnail {
+            width: 100%;
+            height: 80px;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+        
+        .thumbnail.active {
+            border-color: #c7000a;
+        }
+        
+        .thumbnail img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .product-info {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .product-title {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            color: #333;
+        }
+        
+        .product-subtitle {
+            color: #666;
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+        
+        .product-price {
+            font-size: 2.5rem;
+            color: #c7000a;
+            font-weight: bold;
+            margin-bottom: 1.5rem;
+        }
+        
+        .product-badge {
+            display: inline-block;
+            background: #c7000a;
+            color: white;
+            padding: 0.3rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .config-options {
+            margin: 2rem 0;
+        }
+        
+        .config-title {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            color: #333;
+        }
+        
+        .config-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        
+        .config-option {
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 1rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .config-option.active {
+            border-color: #c7000a;
+            background: rgba(199, 0, 10, 0.05);
+        }
+        
+        .config-option.disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        .color-options {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        
+        .color-option {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            border: 3px solid transparent;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .color-option.active {
+            border-color: #333;
+            transform: scale(1.1);
+        }
+        
+        .color-option .color-name {
+            position: absolute;
+            bottom: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.7rem;
+            white-space: nowrap;
+            color: #666;
+        }
+        
+        .purchase-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+        
+        .btn-buy-now {
+            flex: 2;
+            background: #c7000a;
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-buy-now:hover {
+            background: #a80008;
+            transform: translateY(-2px);
+        }
+        
+        .btn-add-cart {
+            flex: 1;
+            background: white;
+            color: #c7000a;
+            border: 2px solid #c7000a;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-add-cart:hover {
+            background: #c7000a;
+            color: white;
+        }
+        
+        .product-features {
+            margin: 3rem 0;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .feature-item {
+            text-align: center;
+            padding: 2rem;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .specs-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .specs-table th,
+        .specs-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .specs-table th {
+            background: #f8f9fa;
+            font-weight: 600;
+            width: 30%;
+        }
+        
+        .related-products {
+            margin: 4rem 0;
+        }
+        
+        .related-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        /* 商品分类标签 */
+        .product-category {
+            display: inline-block;
+            background: #e9ecef;
+            color: #666;
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            margin-bottom: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <header class="main-header">
+        <div class="container">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="images/logo.png" alt="华为Logo">
+                </a>
+            </div>
+            <nav class="main-nav">
+                <ul class="nav-list">
+                    <li><a href="smartphones.html">智能手机</a></li>
+                    <li><a href="laptops-tablets.html">笔记本&平板</a></li>
+                    <li><a href="wearables.html">智能穿戴</a></li>
+                    <li><a href="smart-screen.html">智慧屏</a></li>
+                    <li><a href="smart-home.html">智能家居</a></li>
+                    <li><a href="support.html">服务支持</a></li>
+                </ul>
+            </nav>
+            <div class="header-actions">
+                <a href="login.html" class="login-btn">登录</a>
+                <a href="cart.html" class="cart-btn">购物车 <span class="cart-count">0</span></a>
+            </div>
+            <div class="hamburger-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </header>
+
+    <!-- 商品详情英雄区域 -->
+    <section class="product-detail-hero">
+        <div class="container">
+            <div class="product-detail-container">
+                <!-- 商品图库 -->
+                <div class="product-gallery">
+                    <div class="main-image">
+                        <img src="" alt="" id="main-product-image">
+                    </div>
+                    <div class="thumbnail-gallery" id="thumbnail-gallery">
+                        <!-- 缩略图将通过JavaScript动态生成 -->
+                    </div>
+                </div>
+                
+                <!-- 商品信息 -->
+                <div class="product-info">
+                    <div class="product-category" id="product-category">智能手机</div>
+                    <h1 class="product-title" id="product-title">商品名称</h1>
+                    <p class="product-subtitle" id="product-subtitle">商品副标题</p>
+                    
+                    <div class="product-price" id="product-price">¥0</div>
+                    <div class="product-badge" id="product-badge">新品上市</div>
+                    
+                    <!-- 颜色选择 -->
+                    <div class="config-options" id="color-options-container">
+                        <h3 class="config-title">选择颜色</h3>
+                        <div class="color-options" id="color-options">
+                            <!-- 颜色选项将通过JavaScript动态生成 -->
+                        </div>
+                    </div>
+                    
+                    <!-- 配置选择 -->
+                    <div class="config-options" id="config-options-container">
+                        <h3 class="config-title">选择版本</h3>
+                        <div class="config-grid" id="config-options">
+                            <!-- 配置选项将通过JavaScript动态生成 -->
+                        </div>
+                    </div>
+                    
+                    <!-- 购买操作 -->
+                    <div class="purchase-actions">
+                        <button class="btn-buy-now" onclick="addToCart()">立即购买</button>
+                        <button class="btn-add-cart" onclick="addToCart(true)">加入购物车</button>
+                    </div>
+                    
+                    <!-- 服务保障 -->
+                    <div class="service-guarantee" style="margin-top: 2rem; padding-top: 2rem; border-top: 1px solid #eee;">
+                        <div style="display: flex; justify-content: space-around; text-align: center;">
+                            <div>
+                                <div style="font-size: 1.5rem;">🚚</div>
+                                <div style="font-size: 0.9rem; margin-top: 0.5rem;">次日达</div>
+                            </div>
+                            <div>
+                                <div style="font-size: 1.5rem;">🛡️</div>
+                                <div style="font-size: 0.9rem; margin-top: 0.5rem;">官方正品</div>
+                            </div>
+                            <div>
+                                <div style="font-size: 1.5rem;">📞</div>
+                                <div style="font-size: 0.9rem; margin-top: 0.5rem;">7天无理由</div>
+                            </div>
+                            <div>
+                                <div style="font-size: 1.5rem;">🔧</div>
+                                <div style="font-size: 0.9rem; margin-top: 0.5rem;">一年保修</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 商品特性 -->
+    <section class="product-features">
+        <div class="container">
+            <h2 class="section-title">产品特性</h2>
+            <div class="features-grid" id="features-grid">
+                <!-- 特性将通过JavaScript动态生成 -->
+            </div>
+        </div>
+    </section>
+
+    <!-- 规格参数 -->
+    <section class="product-specs" style="background: #f8f9fa; padding: 4rem 0;">
+        <div class="container">
+            <h2 class="section-title">规格参数</h2>
+            <table class="specs-table" id="specs-table">
+                <!-- 规格参数将通过JavaScript动态生成 -->
+            </table>
+        </div>
+    </section>
+
+    <!-- 相关商品 -->
+    <section class="related-products">
+        <div class="container">
+            <h2 class="section-title">相关产品</h2>
+            <div class="related-grid" id="related-products">
+                <!-- 相关商品将通过JavaScript动态生成 -->
+            </div>
+        </div>
+    </section>
+
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>购物相关</h4>
+                    <ul>
+                        <li><a href="#">配送服务</a></li>
+                        <li><a href="#">支付方式</a></li>
+                        <li><a href="#">购物保障</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>售后服务</h4>
+                    <ul>
+                        <li><a href="#">退换货政策</a></li>
+                        <li><a href="#">维修服务</a></li>
+                        <li><a href="#">使用帮助</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>关于华为</h4>
+                    <ul>
+                        <li><a href="#">公司简介</a></li>
+                        <li><a href="#">新闻中心</a></li>
+                        <li><a href="#">招贤纳士</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>联系我们</h4>
+                    <ul>
+                        <li><a href="#">客服热线: 950800</a></li>
+                        <li><a href="#">在线客服</a></li>
+                        <li><a href="#">门店查询</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 华为技术有限公司 版权所有</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- 购物车弹窗 -->
+    <div id="cart-modal" class="modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 10000; align-items: center; justify-content: center;">
+        <div style="background: white; padding: 2rem; border-radius: 12px; max-width: 400px; text-align: center;">
+            <h3>🎉 添加成功！</h3>
+            <p id="cart-message">商品已添加到购物车</p>
+            <div style="margin-top: 2rem; display: flex; gap: 1rem; justify-content: center;">
+                <button onclick="closeCartModal()" class="btn-add-cart">继续购物</button>
+                <button onclick="goToCart()" class="btn-buy-now">查看购物车</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/script.js"></script>
+    <script src="js/product-data.js"></script>
+    <script>
+        // 商品数据加载和渲染
+        let currentProduct = null;
+        
+        // 页面加载时初始化
+        document.addEventListener('DOMContentLoaded', function() {
+            // 获取URL参数中的商品ID
+            const urlParams = new URLSearchParams(window.location.search);
+            const productId = urlParams.get('id') || 'mate60-pro';
+            
+            // 加载商品数据
+            loadProductData(productId);
+            
+            // 更新购物车数量
+            updateCartCount();
+        });
+        
+        // 加载商品数据
+        function loadProductData(productId) {
+            // 从product-data.js中获取商品数据
+            currentProduct = productDatabase[productId];
+            
+            if (!currentProduct) {
+                // 如果商品不存在，显示错误信息
+                document.querySelector('.product-detail-container').innerHTML = `
+                    <div style="grid-column: 1 / -1; text-align: center; padding: 4rem;">
+                        <h2>商品未找到</h2>
+                        <p>抱歉，您查找的商品不存在或已下架</p>
+                        <a href="index.html" class="cta-button">返回首页</a>
+                    </div>
+                `;
+                return;
+            }
+            
+            // 更新页面标题
+            document.getElementById('page-title').textContent = `${currentProduct.name} - 华为官方商城`;
+            
+            // 更新商品基本信息
+            document.getElementById('product-category').textContent = currentProduct.category;
+            document.getElementById('product-title').textContent = currentProduct.name;
+            document.getElementById('product-subtitle').textContent = currentProduct.subtitle;
+            document.getElementById('product-price').textContent = `¥${currentProduct.price}`;
+            
+            // 更新商品徽章
+            const badgeElement = document.getElementById('product-badge');
+            if (currentProduct.badge) {
+                badgeElement.textContent = currentProduct.badge;
+                badgeElement.style.display = 'inline-block';
+            } else {
+                badgeElement.style.display = 'none';
+            }
+            
+            // 渲染商品图片
+            renderProductImages();
+            
+            // 渲染颜色选项
+            renderColorOptions();
+            
+            // 渲染配置选项
+            renderConfigOptions();
+            
+            // 渲染产品特性
+            renderProductFeatures();
+            
+            // 渲染规格参数
+            renderProductSpecs();
+            
+            // 渲染相关产品
+            renderRelatedProducts();
+        }
+        
+        // 渲染商品图片
+        function renderProductImages() {
+            const mainImage = document.getElementById('main-product-image');
+            const thumbnailGallery = document.getElementById('thumbnail-gallery');
+            
+            // 设置主图
+            mainImage.src = currentProduct.images[0];
+            mainImage.alt = currentProduct.name;
+            
+            // 清空缩略图区域
+            thumbnailGallery.innerHTML = '';
+            
+            // 添加缩略图
+            currentProduct.images.forEach((image, index) => {
+                const thumbnail = document.createElement('div');
+                thumbnail.className = `thumbnail ${index === 0 ? 'active' : ''}`;
+                thumbnail.setAttribute('data-image', image);
+                
+                const img = document.createElement('img');
+                img.src = image;
+                img.alt = `${currentProduct.name} - 图片${index + 1}`;
+                
+                thumbnail.appendChild(img);
+                thumbnail.addEventListener('click', function() {
+                    // 移除所有激活状态
+                    document.querySelectorAll('.thumbnail').forEach(t => t.classList.remove('active'));
+                    // 添加当前激活状态
+                    this.classList.add('active');
+                    
+                    // 更新主图
+                    mainImage.src = this.getAttribute('data-image');
+                });
+                
+                thumbnailGallery.appendChild(thumbnail);
+            });
+        }
+        
+        // 渲染颜色选项
+        function renderColorOptions() {
+            const colorOptionsContainer = document.getElementById('color-options');
+            
+            // 清空颜色选项
+            colorOptionsContainer.innerHTML = '';
+            
+            // 如果没有颜色选项，隐藏整个颜色选择区域
+            if (!currentProduct.colors || currentProduct.colors.length === 0) {
+                document.getElementById('color-options-container').style.display = 'none';
+                return;
+            }
+            
+            // 显示颜色选择区域
+            document.getElementById('color-options-container').style.display = 'block';
+            
+            // 添加颜色选项
+            currentProduct.colors.forEach((color, index) => {
+                const colorOption = document.createElement('div');
+                colorOption.className = `color-option ${index === 0 ? 'active' : ''}`;
+                colorOption.style.backgroundColor = color.value;
+                colorOption.setAttribute('data-color', color.name);
+                colorOption.setAttribute('data-image', color.image);
+                
+                const colorName = document.createElement('div');
+                colorName.className = 'color-name';
+                colorName.textContent = color.name;
+                
+                colorOption.appendChild(colorName);
+                colorOption.addEventListener('click', function() {
+                    // 移除所有激活状态
+                    document.querySelectorAll('.color-option').forEach(c => c.classList.remove('active'));
+                    // 添加当前激活状态
+                    this.classList.add('active');
+                    
+                    // 更新主图
+                    const mainImage = document.getElementById('main-product-image');
+                    mainImage.src = this.getAttribute('data-image');
+                });
+                
+                colorOptionsContainer.appendChild(colorOption);
+            });
+        }
+        
+        // 渲染配置选项
+        function renderConfigOptions() {
+            const configOptionsContainer = document.getElementById('config-options');
+            
+            // 清空配置选项
+            configOptionsContainer.innerHTML = '';
+            
+            // 如果没有配置选项，隐藏整个配置选择区域
+            if (!currentProduct.configs || currentProduct.configs.length === 0) {
+                document.getElementById('config-options-container').style.display = 'none';
+                return;
+            }
+            
+            // 显示配置选择区域
+            document.getElementById('config-options-container').style.display = 'block';
+            
+            // 添加配置选项
+            currentProduct.configs.forEach((config, index) => {
+                const configOption = document.createElement('div');
+                configOption.className = `config-option ${index === 0 ? 'active' : ''} ${config.disabled ? 'disabled' : ''}`;
+                configOption.setAttribute('data-config', config.name);
+                configOption.setAttribute('data-price', config.price);
+                
+                const configName = document.createElement('div');
+                configName.className = 'config-name';
+                configName.textContent = config.name;
+                
+                const configPrice = document.createElement('div');
+                configPrice.className = 'config-price';
+                configPrice.textContent = `¥${config.price}`;
+                
+                configOption.appendChild(configName);
+                configOption.appendChild(configPrice);
+                
+                if (!config.disabled) {
+                    configOption.addEventListener('click', function() {
+                        // 移除所有激活状态
+                        document.querySelectorAll('.config-option').forEach(c => c.classList.remove('active'));
+                        // 添加当前激活状态
+                        this.classList.add('active');
+                        
+                        // 更新价格
+                        const priceElement = document.getElementById('product-price');
+                        priceElement.textContent = '¥' + this.getAttribute('data-price');
+                    });
+                }
+                
+                configOptionsContainer.appendChild(configOption);
+            });
+        }
+        
+        // 渲染产品特性
+        function renderProductFeatures() {
+            const featuresGrid = document.getElementById('features-grid');
+            
+            // 清空特性区域
+            featuresGrid.innerHTML = '';
+            
+            // 添加产品特性
+            currentProduct.features.forEach(feature => {
+                const featureItem = document.createElement('div');
+                featureItem.className = 'feature-item';
+                
+                const featureIcon = document.createElement('div');
+                featureIcon.className = 'feature-icon';
+                featureIcon.textContent = feature.icon;
+                
+                const featureTitle = document.createElement('h3');
+                featureTitle.textContent = feature.title;
+                
+                const featureDesc = document.createElement('p');
+                featureDesc.textContent = feature.description;
+                
+                featureItem.appendChild(featureIcon);
+                featureItem.appendChild(featureTitle);
+                featureItem.appendChild(featureDesc);
+                
+                featuresGrid.appendChild(featureItem);
+            });
+        }
+        
+        // 渲染规格参数
+        function renderProductSpecs() {
+            const specsTable = document.getElementById('specs-table');
+            
+            // 清空规格参数区域
+            specsTable.innerHTML = '';
+            
+            // 添加规格参数
+            currentProduct.specifications.forEach(spec => {
+                const row = document.createElement('tr');
+                
+                const th = document.createElement('th');
+                th.textContent = spec.name;
+                
+                const td = document.createElement('td');
+                td.textContent = spec.value;
+                
+                row.appendChild(th);
+                row.appendChild(td);
+                
+                specsTable.appendChild(row);
+            });
+        }
+        
+        // 渲染相关产品
+        function renderRelatedProducts() {
+            const relatedProductsContainer = document.getElementById('related-products');
+            
+            // 清空相关产品区域
+            relatedProductsContainer.innerHTML = '';
+            
+            // 添加相关产品
+            currentProduct.related.forEach(productId => {
+                const relatedProduct = productDatabase[productId];
+                if (!relatedProduct) return;
+                
+                const productCard = document.createElement('div');
+                productCard.className = 'product-card';
+                
+                const productImage = document.createElement('div');
+                productImage.className = 'product-image';
+                
+                const img = document.createElement('img');
+                img.src = relatedProduct.images[0];
+                img.alt = relatedProduct.name;
+                
+                const productInfo = document.createElement('div');
+                productInfo.className = 'product-info';
+                
+                const productName = document.createElement('h3');
+                productName.textContent = relatedProduct.name;
+                
+                const productDesc = document.createElement('p');
+                productDesc.textContent = relatedProduct.subtitle;
+                
+                const productPrice = document.createElement('div');
+                productPrice.className = 'price';
+                productPrice.textContent = `¥${relatedProduct.price}起`;
+                
+                const productLink = document.createElement('a');
+                productLink.className = 'cta-button';
+                productLink.href = `product-detail.html?id=${productId}`;
+                productLink.textContent = '查看详情';
+                
+                productImage.appendChild(img);
+                productInfo.appendChild(productName);
+                productInfo.appendChild(productDesc);
+                productInfo.appendChild(productPrice);
+                productInfo.appendChild(productLink);
+                
+                productCard.appendChild(productImage);
+                productCard.appendChild(productInfo);
+                
+                relatedProductsContainer.appendChild(productCard);
+            });
+        }
+        
+        // 购物车功能
+        let cartItems = JSON.parse(localStorage.getItem('huawei_cart')) || [];
+        
+        function addToCart(addOnly = false) {
+            if (!currentProduct) return;
+            
+            const selectedColor = document.querySelector('.color-option.active')?.getAttribute('data-color') || '默认';
+            const selectedConfig = document.querySelector('.config-option.active')?.getAttribute('data-config') || '默认';
+            const price = document.querySelector('.config-option.active')?.getAttribute('data-price') || currentProduct.price;
+            
+            const product = {
+                id: currentProduct.id + '-' + selectedColor + '-' + selectedConfig,
+                productId: currentProduct.id,
+                name: currentProduct.name,
+                color: selectedColor,
+                config: selectedConfig,
+                price: price,
+                image: currentProduct.images[0],
+                quantity: 1
+            };
+            
+            // 检查是否已存在相同配置的商品
+            const existingIndex = cartItems.findIndex(item => item.id === product.id);
+            if (existingIndex > -1) {
+                cartItems[existingIndex].quantity += 1;
+            } else {
+                cartItems.push(product);
+            }
+            
+            // 保存到本地存储
+            localStorage.setItem('huawei_cart', JSON.stringify(cartItems));
+            
+            // 更新购物车数量
+            updateCartCount();
+            
+            if (addOnly) {
+                // 显示添加到购物车成功的提示
+                document.getElementById('cart-message').textContent = '商品已成功添加到购物车';
+                document.getElementById('cart-modal').style.display = 'flex';
+            } else {
+                // 直接跳转到购物车页面
+                window.location.href = 'cart.html';
+            }
+        }
+        
+        function updateCartCount() {
+            const totalItems = cartItems.reduce((total, item) => total + item.quantity, 0);
+            document.querySelector('.cart-count').textContent = totalItems;
+        }
+        
+        function closeCartModal() {
+            document.getElementById('cart-modal').style.display = 'none';
+        }
+        
+        function goToCart() {
+            window.location.href = 'cart.html';
+        }
+    </script>
+</body>
+</html>

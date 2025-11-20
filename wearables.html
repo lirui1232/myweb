@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>华为智能穿戴 - 官方商城</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="icon" href="images/favicon.ico">
+    <style>
+        .wearable-features {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 4rem 0;
+            text-align: center;
+        }
+        
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .feature-item {
+            padding: 2rem;
+        }
+        
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <header class="main-header">
+        <div class="container">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="images/v2-7d24d51ddb74c9416b6d4f7e353fb8a5_r.png" alt="华为Logo">
+                </a>
+            </div>
+            <nav class="main-nav">
+                <ul class="nav-list">
+                    <li><a href="smartphones.html">智能手机</a></li>
+                    <li><a href="laptops-tablets.html">笔记本&平板</a></li>
+                    <li><a href="wearables.html" class="active">智能穿戴</a></li>
+                    <li><a href="smart-screen.html">智慧屏</a></li>
+                    <li><a href="smart-home.html">智能家居</a></li>
+                    <li><a href="support.html">服务支持</a></li>
+                </ul>
+            </nav>
+            <div class="header-actions">
+                <a href="login.html" class="login-btn">登录</a>
+                <a href="cart.html" class="cart-btn">购物车 <span class="cart-count">0</span></a>
+            </div>
+            <div class="hamburger-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </header>
+
+    <section class="page-banner" style="background-image: url('images/99.png');">
+        <div class="banner-overlay"></div>
+        <div class="container">
+            <h1>智能穿戴</h1>
+            <p>健康生活，智慧随行</p>
+        </div>
+    </section>
+
+    <!-- 功能特性 -->
+    <section class="wearable-features">
+        <div class="container">
+            <h2>全方位健康管理</h2>
+            <p>24小时健康监测，专业运动指导</p>
+            <div class="feature-grid">
+                <div class="feature-item">
+                    <div class="feature-icon">❤️</div>
+                    <h3>心率监测</h3>
+                    <p>24小时连续心率监测，异常提醒</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">💤</div>
+                    <h3>睡眠监测</h3>
+                    <p>专业睡眠分析，改善睡眠质量</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">🏃</div>
+                    <h3>100+运动模式</h3>
+                    <p>专业运动指导，科学锻炼</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">📱</div>
+                    <h3>智能通知</h3>
+                    <p>消息提醒，通话接听</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 智能手表 -->
+    <section class="product-series">
+        <div class="container">
+            <h2 class="series-title">智能手表</h2>
+            <div class="products-grid">
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="images/635fb3c0fd8edde447d66b5130e931d6.jpg" alt="Watch GT 4">
+                        <div class="product-badge">热销</div>
+                    </div>
+                    <div class="product-info">
+                        <h3>HUAWEI WATCH GT 4</h3>
+                        <p>科学减脂，强劲续航</p>
+                        <div class="product-specs">
+                            <span>14天续航</span>
+                            <span>血氧监测</span>
+                            <span>100+运动模式</span>
+                        </div>
+                        <div class="price">¥1488起</div>
+                        <a href="product-detail.html?id=watch-gt4" class="cta-button">立即购买</a>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="images/890f97b9f9874150bd306041f3cf8412.jpg" alt="Watch Ultimate">
+                    </div>
+                    <div class="product-info">
+                        <h3>HUAWEI WATCH Ultimate</h3>
+                        <p>高端商务，全能旗舰</p>
+                        <div class="product-specs">
+                            <span>钛金属表壳</span>
+                            <span>双向北斗卫星</span>
+                            <span>100米潜水</span>
+                        </div>
+                        <div class="price">¥5999起</div>
+                        <a href="product-detail.html?id=watch-ultimate" class="cta-button">立即购买</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 智能手环 -->
+    <section class="product-series" style="background-color: #f8f9fa;">
+        <div class="container">
+            <h2 class="series-title">智能手环</h2>
+            <div class="products-grid">
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="images/db9ff042f97f278db3fc63d49f0f6d44.jpg" alt="手环8">
+                    </div>
+                    <div class="product-info">
+                        <h3>HUAWEI Band 8</h3>
+                        <p>全面屏，科学睡眠</p>
+                        <div class="product-specs">
+                            <span>1.47英寸AMOLED</span>
+                            <span>血氧监测</span>
+                            <span>14天续航</span>
+                        </div>
+                        <div class="price">¥249起</div>
+                        <a href="product-detail.html?id=band-8" class="cta-button">立即购买</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>智能穿戴</h4>
+                    <ul>
+                        <li><a href="#">智能手表</a></li>
+                        <li><a href="#">智能手环</a></li>
+                        <li><a href="#">智能眼镜</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>健康服务</h4>
+                    <ul>
+                        <li><a href="#">心脏健康</a></li>
+                        <li><a href="#">睡眠服务</a></li>
+                        <li><a href="#">运动健康</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>技术支持</h4>
+                    <ul>
+                        <li><a href="#">使用指南</a></li>
+                        <li><a href="#">固件升级</a></li>
+                        <li><a href="#">维修服务</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 华为技术有限公司 版权所有</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+</body>
+</html>

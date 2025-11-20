@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>华为智能家居 - 官方商城</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="icon" href="images/favicon.ico">
+    <style>
+        .smart-home-hero {
+            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
+            color: white;
+            padding: 5rem 0;
+            text-align: center;
+            margin-top: 70px;
+        }
+        
+        .ecosystem-overview {
+            padding: 4rem 0;
+            background: #f8f9fa;
+        }
+        
+        .ecosystem-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .ecosystem-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .ecosystem-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .ecosystem-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        .scenario-showcase {
+            padding: 4rem 0;
+        }
+        
+        .scenario-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+        
+        .scenario-tab {
+            padding: 1rem 2rem;
+            background: #f0f0f0;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+        }
+        
+        .scenario-tab.active {
+            background: #c7000a;
+            color: white;
+        }
+        
+        .scenario-content {
+            display: none;
+        }
+        
+        .scenario-content.active {
+            display: block;
+        }
+        
+        .scenario-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        
+        .scenario-item {
+            text-align: center;
+            padding: 2rem;
+        }
+        
+        .scenario-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .product-categories {
+            padding: 4rem 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        
+        .category-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+        
+        .category-tab {
+            padding: 1rem 2rem;
+            background: rgba(255,255,255,0.2);
+            color: white;
+            border: 2px solid rgba(255,255,255,0.3);
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .category-tab.active {
+            background: white;
+            color: #764ba2;
+        }
+        
+        .harmony-connect {
+            padding: 4rem 0;
+            text-align: center;
+        }
+        
+        .connect-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .connect-feature {
+            padding: 2rem;
+        }
+        
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <header class="main-header">
+        <div class="container">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="images/v2-7d24d51ddb74c9416b6d4f7e353fb8a5_r.png" alt="华为Logo">
+                </a>
+            </div>
+            <nav class="main-nav">
+                <ul class="nav-list">
+                    <li><a href="smartphones.html">智能手机</a></li>
+                    <li><a href="laptops-tablets.html">笔记本&平板</a></li>
+                    <li><a href="wearables.html">智能穿戴</a></li>
+                    <li><a href="smart-screen.html">智慧屏</a></li>
+                    <li><a href="smart-home.html" class="active">智能家居</a></li>
+                    <li><a href="support.html">服务支持</a></li>
+                </ul>
+            </nav>
+            <div class="header-actions">
+                <a href="login.html" class="login-btn">登录</a>
+                <a href="cart.html" class="cart-btn">购物车 <span class="cart-count">0</span></a>
+            </div>
+            <div class="hamburger-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </header>
+
+    <!-- 智能家居英雄区域 -->
+    <section class="smart-home-hero">
+        <div class="container">
+            <h1>华为全屋智能</h1>
+            <p>智慧生活，一触即达</p>
+            <div style="margin-top: 2rem;">
+                <a href="#ecosystem" class="cta-button" style="background: white; color: #c7000a;">探索智能生态</a>
+                <a href="#products" class="cta-button" style="background: transparent; border: 2px solid white;">查看产品</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 生态概述 -->
+    <section id="ecosystem" class="ecosystem-overview">
+        <div class="container">
+            <h2 class="section-title">全场景智慧生活</h2>
+            <p class="series-desc">基于HarmonyOS的智能家居生态系统</p>
+            <div class="ecosystem-grid">
+                <div class="ecosystem-card">
+                    <div class="ecosystem-icon">🏠</div>
+                    <h3>智能安防</h3>
+                    <p>全方位家庭安全监控，智能门锁、摄像头联动</p>
+                </div>
+                <div class="ecosystem-card">
+                    <div class="ecosystem-icon">💡</div>
+                    <h3>智能照明</h3>
+                    <p>智能调光，情景模式，语音控制</p>
+                </div>
+                <div class="ecosystem-card">
+                    <div class="ecosystem-icon">🌡️</div>
+                    <h3>环境控制</h3>
+                    <p>智能温湿度调节，空气净化，自动优化</p>
+                </div>
+                <div class="ecosystem-card">
+                    <div class="ecosystem-icon">🎵</div>
+                    <h3>智能影音</h3>
+                    <p>全屋音响系统，多房间音频同步</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 场景展示 -->
+    <section class="scenario-showcase">
+        <div class="container">
+            <h2 class="section-title">智慧生活场景</h2>
+            <div class="scenario-tabs">
+                <button class="scenario-tab active" data-scenario="morning">早安模式</button>
+                <button class="scenario-tab" data-scenario="away">离家模式</button>
+                <button class="scenario-tab" data-scenario="evening">观影模式</button>
+                <button class="scenario-tab" data-scenario="sleep">睡眠模式</button>
+            </div>
+            
+            <div id="morning" class="scenario-content active">
+                <h3 style="text-align: center; margin-bottom: 2rem;">开启活力一天</h3>
+                <div class="scenario-grid">
+                    <div class="scenario-item">
+                        <div class="scenario-icon">⏰</div>
+                        <h4>智能唤醒</h4>
+                        <p>窗帘缓缓打开，背景音乐响起</p>
+                    </div>
+                    <div class="scenario-item">
+                        <div class="scenario-icon">☕</div>
+                        <h4>早餐准备</h4>
+                        <p>咖啡机自动启动，厨房灯光调亮</p>
+                    </div>
+                    <div class="scenario-item">
+                        <div class="scenario-icon">📻</div>
+                        <h4>新闻播报</h4>
+                        <p>智能音箱播放天气和新闻</p>
+                    </div>
+                    <div class="scenario-item">
+                        <div class="scenario-icon">🚗</div>
+                        <h4>出行准备</h4>
+                        <p>电梯预约，车库门开启</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="away" class="scenario-content">
+                <h3 style="text-align: center; margin-bottom: 2rem;">安心离家</h3>
+                <div class="scenario-grid">
+                    <div class="scenario-item">
+                        <div class="scenario-icon">🔒</div>
+                        <h4>安防布防</h4>
+                        <p>所有门窗传感器启动监控</p>
+                    </div>
+                    <div class="scenario-item">
+                        <div class="scenario-icon">💡</div>
+                        <h4>节能模式</h4>
+                        <p>不必要的电器自动关闭</p>
+                    </div>
+                    <div class="scenario-item">
+                        <div class="scenario-icon">📹</div>
+                        <h4>远程监控</h4>
+                        <p>摄像头开启移动侦测</p>
+                    </div>
+                    <div class="scenario-item">
+                        <div class="scenario-icon">🌡️</div>
+                        <h4>环境维持</h4>
+                        <p>空调进入节能模式运行</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 产品分类 -->
+    <section id="products" class="product-categories">
+        <div class="container">
+            <h2 class="section-title" style="color: white;">智能家居产品</h2>
+            <div class="category-tabs">
+                <button class="category-tab active" data-category="all">全部产品</button>
+                <button class="category-tab" data-category="security">安防监控</button>
+                <button class="category-tab" data-category="lighting">智能照明</button>
+                <button class="category-tab" data-category="environment">环境电器</button>
+                <button class="category-tab" data-category="audio">影音娱乐</button>
+            </div>
+            
+            <div class="products-grid">
+                <div class="product-card" data-category="security">
+                    <div class="product-image">
+                        <img src="images/1ea7cef7f28dbfb7e98587a6132671a1.jpg" alt="华为智能门锁">
+                        <div class="product-badge">新品</div>
+                    </div>
+                    <div class="product-info">
+                        <h3>华为智能门锁</h3>
+                        <p>3D结构光人脸识别，全自动锁体</p>
+                        <div class="product-features">
+                            <span>人脸识别</span>
+                            <span>指纹解锁</span>
+                            <span>手机NFC</span>
+                        </div>
+                        <div class="price">¥2499起</div>
+                        <a href="product-detail.html" class="cta-button">立即购买</a>
+                    </div>
+                </div>
+                
+                <div class="product-card" data-category="security">
+                    <div class="product-image">
+                        <img src="images/dc6bb8293bdcdb3b59b87a7c156e34a9.jpg" alt="华为智能摄像头">
+                    </div>
+                    <div class="product-info">
+                        <h3>华为AI摄像头</h3>
+                        <p>4K画质，AI人形追踪</p>
+                        <div class="product-features">
+                            <span>360°全景</span>
+                            <span>人形检测</span>
+                            <span>哭声识别</span>
+                        </div>
+                        <div class="price">¥399起</div>
+                        <a href="product-detail.html" class="cta-button">立即购买</a>
+                    </div>
+                </div>
+                
+                <div class="product-card" data-category="lighting">
+                    <div class="product-image">
+                        <img src="images/ea9cb2382938b7f77c4de3a21577046e.jpg" alt="华为智能灯泡">
+                    </div>
+                    <div class="product-info">
+                        <h3>华为智能灯泡</h3>
+                        <p>1600万色，语音控制</p>
+                        <div class="product-features">
+                            <span>RGB调色</span>
+                            <span>语音控制</span>
+                            <span>定时开关</span>
+                        </div>
+                        <div class="price">¥99起</div>
+                        <a href="product-detail.html" class="cta-button">立即购买</a>
+                    </div>
+                </div>
+                
+                <div class="product-card" data-category="environment">
+                    <div class="product-image">
+                        <img src="images/e015d51686e11ccacbcc7db61bd9852c.jpg" alt="华为空气净化器">
+                    </div>
+                    <div class="product-info">
+                        <h3>华为空气净化器</h3>
+                        <p>CADR 800m³/h，智能感应</p>
+                        <div class="product-features">
+                            <span>PM2.5检测</span>
+                            <span>甲醛净化</span>
+                            <span>APP控制</span>
+                        </div>
+                        <div class="price">¥1999起</div>
+                        <a href="product-detail.html" class="cta-button">立即购买</a>
+                    </div>
+                </div>
+                
+                <div class="product-card" data-category="audio">
+                    <div class="product-image">
+                        <img src="images/ae293e41fd5e9ff832f239f6c576a1fb.jpg" alt="华为智能音箱">
+                        <div class="product-badge">热销</div>
+                    </div>
+                    <div class="product-info">
+                        <h3>华为Sound X</h3>
+                        <p>帝瓦雷音响，智能语音助手</p>
+                        <div class="product-features">
+                            <span>Hi-Res音频</span>
+                            <span>语音控制</span>
+                            <span>智能家居中枢</span>
+                        </div>
+                        <div class="price">¥1999起</div>
+                        <a href="product-detail.html" class="cta-button">立即购买</a>
+                    </div>
+                </div>
+                
+                <div class="product-card" data-category="environment">
+                    <div class="product-image">
+                        <img src="images/9ac5069e0a17c0c0004bdeba728e9db3.jpg" alt="华为智能空调">
+                    </div>
+                    <div class="product-info">
+                        <h3>华为智能空调</h3>
+                        <p>AI节能，智能温控</p>
+                        <div class="product-features">
+                            <span>AI节能</span>
+                            <span>语音控制</span>
+                            <span>远程控制</span>
+                        </div>
+                        <div class="price">¥3299起</div>
+                        <a href="product-detail.html" class="cta-button">立即购买</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- HarmonyOS连接 -->
+    <section class="harmony-connect">
+        <div class="container">
+            <h2 class="section-title">HarmonyOS 全场景连接</h2>
+            <p class="series-desc">一碰传，超级终端，无缝体验</p>
+            
+            <div class="connect-features">
+                <div class="connect-feature">
+                    <div class="feature-icon">🔗</div>
+                    <h3>一碰传</h3>
+                    <p>手机碰一碰，快速连接智能设备</p>
+                </div>
+                <div class="connect-feature">
+                    <div class="feature-icon">🔄</div>
+                    <h3>超级终端</h3>
+                    <p>多设备协同，能力互助</p>
+                </div>
+                <div class="connect-feature">
+                    <div class="feature-icon">🎛️</div>
+                    <h3>统一控制</h3>
+                    <p>一个控制中心，管理所有设备</p>
+                </div>
+                <div class="connect-feature">
+                    <div class="feature-icon">🤖</div>
+                    <h3>AI场景</h3>
+                    <p>智能学习，自动优化场景模式</p>
+                </div>
+            </div>
+            
+            <div style="margin-top: 3rem;">
+                <a href="#" class="cta-button">下载"智慧生活"APP</a>
+            </div>
+        </div>
+    </section>
+
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>智能家居</h4>
+                    <ul>
+                        <li><a href="#">全屋智能方案</a></li>
+                        <li><a href="#">智能安防</a></li>
+                        <li><a href="#">智能照明</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>解决方案</h4>
+                    <ul>
+                        <li><a href="#">智慧客厅</a></li>
+                        <li><a href="#">智慧卧室</a></li>
+                        <li><a href="#">智慧厨房</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>服务支持</h4>
+                    <ul>
+                        <li><a href="#">安装服务</a></li>
+                        <li><a href="#">使用指南</a></li>
+                        <li><a href="#">智能场景配置</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>合作伙伴</h4>
+                    <ul>
+                        <li><a href="#">生态产品</a></li>
+                        <li><a href="#">开发者平台</a></li>
+                        <li><a href="#">加入我们</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 华为技术有限公司 版权所有</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+    <script>
+        // 场景切换功能
+        document.querySelectorAll('.scenario-tab').forEach(tab => {
+            tab.addEventListener('click', function() {
+                // 移除所有激活状态
+                document.querySelectorAll('.scenario-tab').forEach(t => t.classList.remove('active'));
+                document.querySelectorAll('.scenario-content').forEach(c => c.classList.remove('active'));
+                
+                // 添加当前激活状态
+                this.classList.add('active');
+                const scenarioId = this.getAttribute('data-scenario');
+                document.getElementById(scenarioId).classList.add('active');
+            });
+        });
+        
+        // 产品分类筛选
+        document.querySelectorAll('.category-tab').forEach(tab => {
+            tab.addEventListener('click', function() {
+                // 移除所有激活状态
+                document.querySelectorAll('.category-tab').forEach(t => t.classList.remove('active'));
+                // 添加当前激活状态
+                this.classList.add('active');
+                
+                const category = this.getAttribute('data-category');
+                const products = document.querySelectorAll('.product-card');
+                
+                products.forEach(product => {
+                    if (category === 'all' || product.getAttribute('data-category') === category) {
+                        product.style.display = 'block';
+                    } else {
+                        product.style.display = 'none';
+                    }
+                });
+            });
+        });
+        
+        // 平滑滚动
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

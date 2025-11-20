@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>登录 - 华为官方商城</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="icon" href="images/favicon.ico">
+    <style>
+        /* 登录页面专用样式 */
+        .login-container {
+            margin-top: 70px;
+            min-height: calc(100vh - 70px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            padding: 2rem 0;
+        }
+        
+        .login-card {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            padding: 3rem;
+            width: 100%;
+            max-width: 400px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .login-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #c7000a, #a80008);
+        }
+        
+        .login-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .login-logo {
+            width: 80px;
+            height: auto;
+            margin-bottom: 1rem;
+        }
+        
+        .login-title {
+            font-size: 1.8rem;
+            color: #333;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+        
+        .login-subtitle {
+            color: #666;
+            font-size: 1rem;
+        }
+        
+        .login-form {
+            margin-top: 2rem;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #333;
+            font-weight: 500;
+        }
+        
+        .form-input {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background: #fafafa;
+        }
+        
+        .form-input:focus {
+            border-color: #c7000a;
+            background: white;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(199, 0, 10, 0.1);
+        }
+        
+        .form-input.error {
+            border-color: #dc3545;
+            background: #fff5f5;
+        }
+        
+        .error-message {
+            color: #dc3545;
+            font-size: 0.875rem;
+            margin-top: 0.5rem;
+            display: none;
+        }
+        
+        .password-toggle {
+            position: absolute;
+            right: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: #666;
+            cursor: pointer;
+            font-size: 1.2rem;
+        }
+        
+        .remember-forgot {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            font-size: 0.9rem;
+        }
+        
+        .remember-me {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .remember-me input[type="checkbox"] {
+            width: 16px;
+            height: 16px;
+            accent-color: #c7000a;
+        }
+        
+        .forgot-password {
+            color: #c7000a;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .forgot-password:hover {
+            color: #a80008;
+            text-decoration: underline;
+        }
+        
+        .login-button {
+            width: 100%;
+            padding: 1rem;
+            background: #c7000a;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 1.5rem;
+        }
+        
+        .login-button:hover {
+            background: #a80008;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(199, 0, 10, 0.3);
+        }
+        
+        .login-button:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+        
+        .divider {
+            text-align: center;
+            margin: 2rem 0;
+            position: relative;
+            color: #666;
+        }
+        
+        .divider::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: #e0e0e0;
+        }
+        
+        .divider span {
+            background: white;
+            padding: 0 1rem;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .social-login {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        
+        .social-button {
+            flex: 1;
+            padding: 0.8rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            background: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            font-size: 1.2rem;
+        }
+        
+        .social-button:hover {
+            border-color: #c7000a;
+            transform: translateY(-2px);
+        }
+        
+        .social-button.wechat {
+            color: #07c160;
+        }
+        
+        .social-button.qq {
+            color: #12b7f5;
+        }
+        
+        .register-link {
+            text-align: center;
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        .register-link a {
+            color: #c7000a;
+            text-decoration: none;
+            font-weight: 600;
+            margin-left: 0.5rem;
+        }
+        
+        .register-link a:hover {
+            text-decoration: underline;
+        }
+        
+        .login-footer {
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid #e0e0e0;
+            text-align: center;
+            color: #999;
+            font-size: 0.8rem;
+        }
+        
+        /* 加载动画 */
+        .loading-spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 2px solid transparent;
+            border-top: 2px solid white;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-right: 0.5rem;
+            vertical-align: middle;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* 响应式调整 */
+        @media (max-width: 480px) {
+            .login-card {
+                padding: 2rem 1.5rem;
+                margin: 0 1rem;
+            }
+            
+            .social-login {
+                flex-direction: column;
+            }
+            
+            .remember-forgot {
+                flex-direction: column;
+                gap: 1rem;
+                align-items: flex-start;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="main-header">
+        <div class="container">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="images/v2-7d24d51ddb74c9416b6d4f7e353fb8a5_r.png" alt="华为Logo">
+                </a>
+            </div>
+            <nav class="main-nav">
+                <ul class="nav-list">
+                    <li><a href="smartphones.html">智能手机</a></li>
+                    <li><a href="laptops-tablets.html">笔记本&平板</a></li>
+                    <li><a href="wearables.html">智能穿戴</a></li>
+                    <li><a href="smart-screen.html">智慧屏</a></li>
+                    <li><a href="smart-home.html">智能家居</a></li>
+                    <li><a href="support.html">服务支持</a></li>
+                </ul>
+            </nav>
+            <div class="header-actions">
+                <a href="login.html" class="login-btn">登录</a>
+                <a href="cart.html" class="cart-btn">购物车 <span class="cart-count">0</span></a>
+            </div>
+            <div class="hamburger-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </header>
+
+    <section class="login-container">
+        <div class="login-card">
+            <div class="login-header">
+                <img src="images/v2-7d24d51ddb74c9416b6d4f7e353fb8a5_r.png" alt="华为" class="login-logo">
+                <h1 class="login-title">登录华为账号</h1>
+                <p class="login-subtitle">登录以享受个性化服务</p>
+            </div>
+            
+            <form class="login-form" id="loginForm">
+                <div class="form-group">
+                    <label for="username" class="form-label">手机号/邮箱</label>
+                    <input type="text" id="username" class="form-input" placeholder="请输入手机号或邮箱" required>
+                    <div class="error-message" id="usernameError">请输入正确的手机号或邮箱</div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="password" class="form-label">密码</label>
+                    <input type="password" id="password" class="form-input" placeholder="请输入密码" required>
+                    <button type="button" class="password-toggle" id="passwordToggle">👁️</button>
+                    <div class="error-message" id="passwordError">密码长度至少6位</div>
+                </div>
+                
+                <div class="remember-forgot">
+                    <label class="remember-me">
+                        <input type="checkbox" id="rememberMe">
+                        <span>记住我</span>
+                    </label>
+                    <a href="forgot-password.html" class="forgot-password">忘记密码？</a>
+                </div>
+                
+                <button type="submit" class="login-button" id="loginButton">
+                    <span id="loginText">登录</span>
+                </button>
+            </form>
+            
+            <div class="divider">
+                <span>或使用以下方式登录</span>
+            </div>
+            
+            <div class="social-login">
+                <button class="social-button wechat" onclick="socialLogin('wechat')">
+                    <span>💬</span> 微信
+                </button>
+                <button class="social-button qq" onclick="socialLogin('qq')">
+                    <span>🐧</span> QQ
+                </button>
+            </div>
+            
+            <div class="register-link">
+                还没有华为账号？
+                <a href="register.html">立即注册</a>
+            </div>
+            
+            <div class="login-footer">
+                登录即表示您同意<a href="#">用户协议</a>和<a href="#">隐私政策</a>
+            </div>
+        </div>
+    </section>
+
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>购物相关</h4>
+                    <ul>
+                        <li><a href="#">配送服务</a></li>
+                        <li><a href="#">支付方式</a></li>
+                        <li><a href="#">购物保障</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>售后服务</h4>
+                    <ul>
+                        <li><a href="#">退换货政策</a></li>
+                        <li><a href="#">维修服务</a></li>
+                        <li><a href="#">使用帮助</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>关于华为</h4>
+                    <ul>
+                        <li><a href="#">公司简介</a></li>
+                        <li><a href="#">新闻中心</a></li>
+                        <li><a href="#">招贤纳士</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>联系我们</h4>
+                    <ul>
+                        <li><a href="#">客服热线: 950800</a></li>
+                        <li><a href="#">在线客服</a></li>
+                        <li><a href="#">门店查询</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 华为技术有限公司 版权所有</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // 登录表单处理
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const rememberMe = document.getElementById('rememberMe').checked;
+            
+            // 验证输入
+            if (!validateForm(username, password)) {
+                return;
+            }
+            
+            // 显示加载状态
+            const loginButton = document.getElementById('loginButton');
+            const loginText = document.getElementById('loginText');
+            loginButton.disabled = true;
+            loginText.innerHTML = '<span class="loading-spinner"></span>登录中...';
+            
+            // 模拟登录请求
+            setTimeout(() => {
+                // 在实际项目中，这里应该是真实的API调用
+                if (username && password) {
+                    // 登录成功
+                    localStorage.setItem('huawei_user', JSON.stringify({
+                        username: username,
+                        rememberMe: rememberMe
+                    }));
+                    
+                    // 更新导航栏状态
+                    updateNavigation(true);
+                    
+                    // 跳转到首页或来源页面
+                    const urlParams = new URLSearchParams(window.location.search);
+                    const redirect = urlParams.get('redirect') || 'index.html';
+                    window.location.href = redirect;
+                } else {
+                    // 登录失败
+                    alert('登录失败，请检查用户名和密码');
+                    loginButton.disabled = false;
+                    loginText.textContent = '登录';
+                }
+            }, 1500);
+        });
+        
+        // 表单验证
+        function validateForm(username, password) {
+            let isValid = true;
+            
+            // 验证用户名
+            const usernameError = document.getElementById('usernameError');
+            const usernameInput = document.getElementById('username');
+            
+            if (!username) {
+                usernameError.textContent = '请输入手机号或邮箱';
+                usernameError.style.display = 'block';
+                usernameInput.classList.add('error');
+                isValid = false;
+            } else if (!isValidUsername(username)) {
+                usernameError.textContent = '请输入正确的手机号或邮箱';
+                usernameError.style.display = 'block';
+                usernameInput.classList.add('error');
+                isValid = false;
+            } else {
+                usernameError.style.display = 'none';
+                usernameInput.classList.remove('error');
+            }
+            
+            // 验证密码
+            const passwordError = document.getElementById('passwordError');
+            const passwordInput = document.getElementById('password');
+            
+            if (!password) {
+                passwordError.textContent = '请输入密码';
+                passwordError.style.display = 'block';
+                passwordInput.classList.add('error');
+                isValid = false;
+            } else if (password.length < 6) {
+                passwordError.textContent = '密码长度至少6位';
+                passwordError.style.display = 'block';
+                passwordInput.classList.add('error');
+                isValid = false;
+            } else {
+                passwordError.style.display = 'none';
+                passwordInput.classList.remove('error');
+            }
+            
+            return isValid;
+        }
+        
+        // 验证用户名格式
+        function isValidUsername(username) {
+            // 手机号正则（中国大陆）
+            const phoneRegex = /^1[3-9]\d{9}$/;
+            // 邮箱正则
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            
+            return phoneRegex.test(username) || emailRegex.test(username);
+        }
+        
+        // 密码显示/隐藏切换
+        document.getElementById('passwordToggle').addEventListener('click', function() {
+            const passwordInput = document.getElementById('password');
+            const type = passwordInput.getAttribute('type');
+            
+            if (type === 'password') {
+                passwordInput.setAttribute('type', 'text');
+                this.textContent = '🙈';
+            } else {
+                passwordInput.setAttribute('type', 'password');
+                this.textContent = '👁️';
+            }
+        });
+        
+        // 第三方登录
+        function socialLogin(provider) {
+            alert(`即将跳转到${provider}登录，实际项目中这里会实现真实的OAuth流程`);
+            // 实际项目中这里会重定向到第三方登录页面
+        }
+        
+        // 更新导航栏状态
+        function updateNavigation(isLoggedIn) {
+            if (isLoggedIn) {
+                const user = JSON.parse(localStorage.getItem('huawei_user'));
+                if (user) {
+                    // 更新所有页面的登录状态
+                    document.querySelectorAll('.login-btn').forEach(btn => {
+                        btn.textContent = user.username;
+                        btn.href = 'account.html';
+                    });
+                }
+            }
+        }
+        
+        // 页面加载时检查登录状态
+        document.addEventListener('DOMContentLoaded', function() {
+            const user = localStorage.getItem('huawei_user');
+            if (user) {
+                // 如果已登录，跳转到首页或来源页面
+                const urlParams = new URLSearchParams(window.location.search);
+                const redirect = urlParams.get('redirect') || 'index.html';
+                if (redirect !== 'login.html') {
+                    window.location.href = redirect;
+                }
+            }
+            
+            // 更新购物车数量
+            updateCartCount();
+        });
+        
+        // 购物车数量更新
+        function updateCartCount() {
+            const cartItems = JSON.parse(localStorage.getItem('huawei_cart')) || [];
+            const totalItems = cartItems.reduce((total, item) => total + item.quantity, 0);
+            document.querySelector('.cart-count').textContent = totalItems;
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>服务支持 - 华为官方</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="icon" href="images/favicon.ico">
+    <style>
+        .support-hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 4rem 0;
+            text-align: center;
+        }
+        
+        .search-box {
+            max-width: 600px;
+            margin: 2rem auto;
+        }
+        
+        .search-box input {
+            width: 100%;
+            padding: 1rem;
+            border: none;
+            border-radius: 25px;
+            font-size: 1rem;
+        }
+        
+        .support-categories {
+            padding: 4rem 0;
+        }
+        
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        
+        .category-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .category-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .category-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        .faq-section {
+            background: #f8f9fa;
+            padding: 4rem 0;
+        }
+        
+        .faq-item {
+            background: white;
+            margin-bottom: 1rem;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .faq-question {
+            padding: 1.5rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 500;
+        }
+        
+        .faq-answer {
+            padding: 0 1.5rem 1.5rem;
+            display: none;
+        }
+        
+        .service-locations {
+            padding: 4rem 0;
+        }
+    </style>
+</head>
+<body>
+    <header class="main-header">
+        <div class="container">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="images/v2-7d24d51ddb74c9416b6d4f7e353fb8a5_r.png" alt="华为Logo">
+                </a>
+            </div>
+            <nav class="main-nav">
+                <ul class="nav-list">
+                    <li><a href="smartphones.html">智能手机</a></li>
+                    <li><a href="laptops-tablets.html">笔记本&平板</a></li>
+                    <li><a href="wearables.html">智能穿戴</a></li>
+                    <li><a href="smart-screen.html">智慧屏</a></li>
+                    <li><a href="smart-home.html">智能家居</a></li>
+                    <li><a href="support.html" class="active">服务支持</a></li>
+                </ul>
+            </nav>
+            <div class="header-actions">
+                <a href="login.html" class="login-btn">登录</a>
+                <a href="cart.html" class="cart-btn">购物车 <span class="cart-count">0</span></a>
+            </div>
+            <div class="hamburger-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </header>
+
+    <section class="support-hero">
+        <div class="container">
+            <h1>华为服务支持</h1>
+            <p>我们随时为您提供帮助</p>
+            <div class="search-box">
+                <input type="text" placeholder="请输入您遇到的问题或关键词...">
+            </div>
+        </div>
+    </section>
+
+    <!-- 服务分类 -->
+    <section class="support-categories">
+        <div class="container">
+            <h2 class="section-title">快速服务通道</h2>
+            <div class="category-grid">
+                <div class="category-card">
+                    <div class="category-icon">📱</div>
+                    <h3>手机服务</h3>
+                    <p>维修、换屏、电池更换</p>
+                    <a href="#" class="cta-button">了解更多</a>
+                </div>
+                <div class="category-card">
+                    <div class="category-icon">💻</div>
+                    <h3>电脑服务</h3>
+                    <p>系统安装、硬件维修</p>
+                    <a href="#" class="cta-button">了解更多</a>
+                </div>
+                <div class="category-card">
+                    <div class="category-icon">⌚</div>
+                    <h3>穿戴设备</h3>
+                    <p>表带更换、设备检测</p>
+                    <a href="#" class="cta-button">了解更多</a>
+                </div>
+                <div class="category-card">
+                    <div class="category-icon">📺</div>
+                    <h3>智慧屏服务</h3>
+                    <p>安装、调试、维修</p>
+                    <a href="#" class="cta-button">了解更多</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 常见问题 -->
+    <section class="faq-section">
+        <div class="container">
+            <h2 class="section-title">常见问题</h2>
+            <div class="faq-list">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        如何查询我的设备保修状态？
+                        <span>+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>您可以通过华为官方网站或"我的华为"APP，输入设备序列号查询保修状态。序列号通常可以在设备设置-关于手机中找到。</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        设备进水了怎么办？
+                        <span>+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>立即关机，不要充电，用干布擦干表面水分，尽快送到华为授权服务中心进行专业处理。</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        如何预约维修服务？
+                        <span>+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>可以通过华为官网服务支持页面、"我的华为"APP或拨打客服热线950800进行预约。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 服务网点 -->
+    <section class="service-locations">
+        <div class="container">
+            <h2 class="section-title">服务网点查询</h2>
+            <div class="location-search">
+                <input type="text" placeholder="输入城市或地区" style="padding: 1rem; width: 300px; margin-right: 1rem;">
+                <button class="cta-button">搜索</button>
+            </div>
+            <div class="location-list">
+                <!-- 这里可以动态加载服务网点 -->
+                <p>请输入您所在的城市查询最近的华为授权服务中心。</p>
+            </div>
+        </div>
+    </section>
+
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>服务支持</h4>
+                    <ul>
+                        <li><a href="#">服务政策</a></li>
+                        <li><a href="#">维修进度查询</a></li>
+                        <li><a href="#">备件价格查询</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>联系我们</h4>
+                    <ul>
+                        <li><a href="#">客服热线: 950800</a></li>
+                        <li><a href="#">在线客服</a></li>
+                        <li><a href="#">服务邮箱</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>更多资源</h4>
+                    <ul>
+                        <li><a href="#">驱动下载</a></li>
+                        <li><a href="#">软件更新</a></li>
+                        <li><a href="#">使用手册</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 华为技术有限公司 版权所有</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+    <script>
+        // FAQ展开收起功能
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', () => {
+                const answer = question.nextElementSibling;
+                const isActive = answer.style.display === 'block';
+                
+                // 关闭所有答案
+                document.querySelectorAll('.faq-answer').forEach(ans => {
+                    ans.style.display = 'none';
+                });
+                document.querySelectorAll('.faq-question span').forEach(span => {
+                    span.textContent = '+';
+                });
+                
+                // 切换当前答案
+                if (!isActive) {
+                    answer.style.display = 'block';
+                    question.querySelector('span').textContent = '-';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
