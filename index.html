@@ -4,16 +4,399 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>华为 - 构建万物互联的智能世界</title>
-    <link rel="stylesheet" href="main.css">
+    <style>
+        /* 在这里粘贴完整的CSS代码 */
+        /* 基础重置和全局样式 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #fff;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* 头部导航样式 */
+        .main-header {
+            background: #fff;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .main-header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+        }
+
+        .logo img {
+            height: 40px;
+            width: auto;
+        }
+
+        .nav-list {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        .nav-list a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s;
+            font-size: 16px;
+        }
+
+        .nav-list a:hover {
+            color: #c7000a;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .login-btn, .cart-btn {
+            text-decoration: none;
+            color: #333;
+            padding: 8px 16px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            transition: all 0.3s;
+            font-size: 14px;
+        }
+
+        .login-btn:hover, .cart-btn:hover {
+            background: #f5f5f5;
+            border-color: #c7000a;
+        }
+
+        /* 主轮播图样式 */
+        .main-banner {
+            margin-top: 70px;
+            position: relative;
+            height: 500px;
+            overflow: hidden;
+            background: #f8f8f8;
+        }
+
+        .banner-container {
+            position: relative;
+            height: 100%;
+        }
+
+        .banner-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        .banner-slide.active {
+            opacity: 1;
+        }
+
+        .banner-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .banner-content {
+            position: absolute;
+            top: 50%;
+            left: 10%;
+            transform: translateY(-50%);
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .banner-content h2 {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .banner-content p {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 12px 30px;
+            background: #c7000a;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: background 0.3s;
+            font-weight: bold;
+        }
+
+        .cta-button:hover {
+            background: #a00008;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .banner-indicators {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+        }
+
+        .indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.5);
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .indicator.active {
+            background: white;
+        }
+
+        .indicator:hover {
+            background: rgba(255,255,255,0.8);
+        }
+
+        /* 产品区域样式 */
+        .products-section {
+            padding: 80px 0;
+            background: #fff;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 50px;
+            color: #333;
+            font-weight: bold;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            border: 1px solid #eee;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+
+        .product-image {
+            height: 250px;
+            overflow: hidden;
+            background: #f8f8f8;
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .product-card:hover .product-image img {
+            transform: scale(1.05);
+        }
+
+        .product-info {
+            padding: 20px;
+        }
+
+        .product-info h3 {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            color: #333;
+            font-weight: bold;
+        }
+
+        .product-info p {
+            color: #666;
+            margin-bottom: 15px;
+            font-size: 14px;
+        }
+
+        .price {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #c7000a;
+        }
+
+        /* 页脚样式 */
+        .main-footer {
+            background: #f8f8f8;
+            padding: 50px 0 20px;
+            margin-top: 50px;
+            border-top: 1px solid #eee;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 30px;
+        }
+
+        .footer-section h4 {
+            margin-bottom: 20px;
+            color: #333;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section li {
+            margin-bottom: 10px;
+        }
+
+        .footer-section a {
+            text-decoration: none;
+            color: #666;
+            transition: color 0.3s;
+            font-size: 14px;
+        }
+
+        .footer-section a:hover {
+            color: #c7000a;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+            color: #666;
+            font-size: 14px;
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .main-header .container {
+                flex-wrap: wrap;
+                padding: 10px 20px;
+            }
+            
+            .nav-list {
+                flex-direction: column;
+                width: 100%;
+                display: none;
+                background: white;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+                padding: 20px 0;
+            }
+            
+            .nav-list.active {
+                display: flex;
+            }
+            
+            .nav-list li {
+                width: 100%;
+                text-align: center;
+                border-bottom: 1px solid #eee;
+            }
+            
+            .nav-list a {
+                display: block;
+                padding: 15px;
+            }
+            
+            .banner-content h2 {
+                font-size: 2rem;
+            }
+            
+            .banner-content p {
+                font-size: 1rem;
+            }
+            
+            .products-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+        }
+
+        /* 动画效果 */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        @keyframes slideIn {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        @keyframes slideOut {
+            from { transform: translateX(0); opacity: 1; }
+            to { transform: translateX(100%); opacity: 0; }
+        }
+
+        .cart-notification {
+            animation: slideIn 0.3s ease-out;
+        }
+    </style>
     <link rel="icon" href="./images/favicon.ico">
 </head>
 <body>
-    <!-- 顶部导航栏 -->
+    <!-- 页面内容保持不变 -->
     <header class="main-header">
         <div class="container">
             <div class="logo">
                 <a href="index.html">
-                    <!-- 修正图片路径 -->
                     <img src="./images/v2-7d24d51ddb74c9416b6d4f7e353fb8a5_r.png" alt="华为Logo">
                 </a>
             </div>
@@ -34,11 +417,9 @@
         </div>
     </header>
 
-    <!-- 主轮播图 -->
     <section class="main-banner">
         <div class="banner-container">
             <div class="banner-slide active">
-                <!-- 修正图片路径 -->
                 <img src="./images/7bbc07c3438ad547fc9ea5043839fc4e-5959a6dc-f1d8-41cb-ac21-eee844f719e2.png" alt="华为Mate 60 Pro">
                 <div class="banner-content">
                     <h2>华为Mate 60系列</h2>
@@ -48,7 +429,6 @@
             </div>
             
             <div class="banner-slide">
-                <!-- 修正图片路径 -->
                 <img src="./images/913c0e78b02d1bb95998965a77705a25-3bbd8c55-0e64-41c7-89f9-156c202ca1ea.png" alt="华为P60 Pro">
                 <div class="banner-content">
                     <h2>华为P60 Pro</h2>
@@ -57,7 +437,6 @@
                 </div>
             </div>
             
-            <!-- 轮播指示器 -->
             <div class="banner-indicators">
                 <span class="indicator active"></span>
                 <span class="indicator"></span>
@@ -65,14 +444,12 @@
         </div>
     </section>
 
-    <!-- 产品展示区 -->
     <section class="products-section">
         <div class="container">
             <h2 class="section-title">热门产品</h2>
             <div class="products-grid">
                 <div class="product-card">
                     <div class="product-image">
-                        <!-- 修正图片路径 -->
                         <img src="./images/eaedc3a61230bcd1007a3a3f3f152779.jpg" alt="华为手机">
                     </div>
                     <div class="product-info">
@@ -81,12 +458,32 @@
                         <span class="price">¥3999起</span>
                     </div>
                 </div>
-                <!-- 更多产品卡片 -->
+                
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="./images/7bbc07c3438ad547fc9ea5043839fc4e-5959a6dc-f1d8-41cb-ac21-eee844f719e2.png" alt="华为Mate系列">
+                    </div>
+                    <div class="product-info">
+                        <h3>华为Mate系列</h3>
+                        <p>商务旗舰之选</p>
+                        <span class="price">¥5999起</span>
+                    </div>
+                </div>
+                
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="./images/913c0e78b02d1bb95998965a77705a25-3bbd8c55-0e64-41c7-89f9-156c202ca1ea.png" alt="华为智能手表">
+                    </div>
+                    <div class="product-info">
+                        <h3>华为Watch GT</h3>
+                        <p>智能健康伴侣</p>
+                        <span class="price">¥1299起</span>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- 页脚 -->
     <footer class="main-footer">
         <div class="container">
             <div class="footer-content">
@@ -121,7 +518,7 @@
         </div>
     </footer>
 
-    <!-- 内联JavaScript - 替换外部JS文件 -->
+    <!-- 内联JavaScript -->
     <script>
     // 华为商城核心功能
     (function() {
@@ -185,9 +582,9 @@
                 const notification = document.createElement('div');
                 notification.className = 'cart-notification';
                 notification.innerHTML = `
-                    <div class="notification-content">
-                        <span>✅ 已添加到购物车</span>
-                        <p>${product.name}</p>
+                    <div style="padding: 10px;">
+                        <strong>✅ 已添加到购物车</strong>
+                        <p style="margin: 5px 0;">${product.name}</p>
                     </div>
                 `;
                 
@@ -198,7 +595,7 @@
                     background: white;
                     border: 2px solid #c7000a;
                     border-radius: 8px;
-                    padding: 1rem;
+                    padding: 0;
                     box-shadow: 0 5px 15px rgba(0,0,0,0.2);
                     z-index: 10000;
                     animation: slideIn 0.3s ease-out;
@@ -265,146 +662,23 @@
             }
         }
 
-        // 移动菜单功能
-        class MobileMenu {
-            constructor() {
-                this.init();
-            }
-
-            init() {
-                this.createHamburgerMenu();
-                
-                const hamburger = document.querySelector('.hamburger-menu');
-                const navList = document.querySelector('.nav-list');
-                
-                if (hamburger && navList) {
-                    hamburger.addEventListener('click', () => {
-                        navList.classList.toggle('active');
-                        hamburger.classList.toggle('active');
-                    });
-
-                    // 点击外部关闭菜单
-                    document.addEventListener('click', (e) => {
-                        if (!hamburger.contains(e.target) && !navList.contains(e.target)) {
-                            navList.classList.remove('active');
-                            hamburger.classList.remove('active');
-                        }
-                    });
-                }
-            }
-
-            createHamburgerMenu() {
-                if (!document.querySelector('.hamburger-menu')) {
-                    const hamburger = document.createElement('div');
-                    hamburger.className = 'hamburger-menu';
-                    hamburger.innerHTML = '☰';
-                    hamburger.style.cssText = `
-                        display: none;
-                        font-size: 24px;
-                        cursor: pointer;
-                        padding: 10px;
-                    `;
-                    
-                    document.querySelector('.main-header .container').appendChild(hamburger);
-                }
-            }
-        }
-
         // 主应用类
         class HuaweiStore {
             constructor() {
                 this.cart = new ShoppingCart();
                 this.slider = new BannerSlider();
-                this.mobileMenu = new MobileMenu();
                 this.init();
             }
 
             init() {
                 console.log('华为商城初始化完成');
-                this.addGlobalStyles();
-                this.bindGlobalEvents();
-            }
-
-            addGlobalStyles() {
-                const styles = `
-                    @keyframes slideIn {
-                        from { transform: translateX(100%); opacity: 0; }
-                        to { transform: translateX(0); opacity: 1; }
-                    }
-                    
-                    @keyframes slideOut {
-                        from { transform: translateX(0); opacity: 1; }
-                        to { transform: translateX(100%); opacity: 0; }
-                    }
-                    
-                    @keyframes fadeIn {
-                        from { opacity: 0; transform: translateY(20px); }
-                        to { opacity: 1; transform: translateY(0); }
-                    }
-                    
-                    .fade-in {
-                        animation: fadeIn 0.5s ease-in;
-                    }
-
-                    /* 移动端样式 */
-                    @media (max-width: 768px) {
-                        .hamburger-menu {
-                            display: block !important;
-                        }
-                        
-                        .nav-list {
-                            display: none;
-                            position: absolute;
-                            top: 100%;
-                            left: 0;
-                            width: 100%;
-                            background: white;
-                            flex-direction: column;
-                            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-                            z-index: 1000;
-                        }
-                        
-                        .nav-list.active {
-                            display: flex;
-                        }
-                        
-                        .nav-list li {
-                            width: 100%;
-                            text-align: center;
-                            border-bottom: 1px solid #eee;
-                        }
-                        
-                        .nav-list a {
-                            display: block;
-                            padding: 15px;
-                        }
-                    }
-                `;
-
-                const styleSheet = document.createElement('style');
-                styleSheet.textContent = styles;
-                document.head.appendChild(styleSheet);
-            }
-
-            bindGlobalEvents() {
-                // 全局错误处理
-                window.addEventListener('error', (e) => {
-                    console.error('全局错误:', e.error);
-                });
+                document.body.classList.add('fade-in');
             }
         }
-
-        // 全局函数
-        window.addToCart = function(product) {
-            if (window.huaweiStore && window.huaweiStore.cart) {
-                window.huaweiStore.cart.addItem(product);
-            }
-        };
 
         // 初始化
         document.addEventListener('DOMContentLoaded', function() {
             window.huaweiStore = new HuaweiStore();
-            document.body.classList.add('fade-in');
             console.log('华为商城 - 构建万物互联的智能世界');
         });
 
